@@ -2,11 +2,11 @@
 
 Contact::Contact()
 {
-	first_name = "Default";
-	last_name = "Default";
-	nick_name = "Default";
-	phone_number = "00000000";
-	darkest_secret = "Default";
+	first_name = " ";
+	last_name = " ";
+	nick_name = " ";
+	phone_number = " ";
+	darkest_secret = " ";
 }
 
 Contact::~Contact()

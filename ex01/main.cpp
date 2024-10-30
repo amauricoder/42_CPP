@@ -3,14 +3,15 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 09:38:51 by aconceic          #+#    #+#             */
-/*   Updated: 2024/07/28 20:39:02 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/10/21 16:53:22 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
+
 
 int	main(void)
 {
@@ -19,12 +20,17 @@ int	main(void)
 
 	while(1)
 	{
-		std::cout << "Press 1 to ADD new user or 0 to EXIT" << std::endl;
+		print_header();
+		print_options("main");
 		std::cin >> user_input;
 		if (user_input == "1")
 		{
 			std::cout << "Put User Information" << std::endl;
 			phone_book.addContact();
+		}
+		else if (user_input == "2")
+		{
+			phone_book.contactList();
 		}
 		else if (user_input == "exit" || std::cin.eof() == true || user_input == "0")
 			return (std::cout << "Exiting..." << std::endl, 0);

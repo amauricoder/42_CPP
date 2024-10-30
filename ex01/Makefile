@@ -2,7 +2,8 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = ex01
-SRC = Contact.cpp PhoneBook.cpp
+SRC = Contact.cpp PhoneBook.cpp Print.cpp\
+
 OBJ_DIR = ./objs/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
@@ -22,7 +23,6 @@ clean:
 
 fclean:
 	rm -f $(NAME)
+	rm -rf objs
 
 re: fclean all
-
-.PHONY: all clean fclean re
