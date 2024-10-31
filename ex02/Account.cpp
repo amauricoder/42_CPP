@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Account.cpp                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/10/23 18:50:32 by aconceic          #+#    #+#             */
-/*   Updated: 2024/10/24 20:11:01 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/10/31 18:08:01 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -113,6 +113,7 @@ void	Account::makeDeposit(int deposit)
 
 	_amount += deposit;
 	_nbDeposits ++;
+	_totalNbDeposits ++;
 	_totalAmount += deposit;
 	Account::_displayTimestamp();
 	std::cout 
@@ -146,7 +147,7 @@ bool	Account::makeWithdrawal(int withdrawal)
 		return (true);
 	}
 	std::cout 
-		<< "withdrawal: refused"
+		<< "withdrawal:refused"
 	<< std::endl;
 	return (false);
 }

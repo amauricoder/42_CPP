@@ -27,3 +27,7 @@ fclean:
 re: fclean all
 
 .PHONY: all clean fclean re
+
+#USE THIS TO COMPARE THE FILES AND TEST IT
+#SAVE THE OUTPUT AS 'file'
+#diff <(sed 's/^[^ ]* //' file) <(sed 's/^[^ ]* //' 19920104_091532.log)
