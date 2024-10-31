@@ -6,12 +6,11 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 09:38:51 by aconceic          #+#    #+#             */
-/*   Updated: 2024/10/21 16:53:22 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/10/31 17:41:45 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PhoneBook.hpp"
-
 
 int	main(void)
 {
@@ -20,22 +19,22 @@ int	main(void)
 
 	while(1)
 	{
-		print_header();
+		print_header("main");
 		print_options("main");
-		std::cin >> user_input;
-		if (user_input == "1")
+		std::getline(std::cin, user_input);
+		if (user_input == "1" || user_input == "ADD")
 		{
 			std::cout << "Put User Information" << std::endl;
 			phone_book.addContact();
 		}
-		else if (user_input == "2")
+		else if (user_input == "2" || user_input == "SEARCH")
 		{
 			phone_book.contactList();
 		}
-		else if (user_input == "exit" || std::cin.eof() == true || user_input == "0")
-			return (std::cout << "Exiting..." << std::endl, 0);
+		else if (user_input == "EXIT" || std::cin.eof() == true || user_input == "0")
+			return (std::cout << BG_RED "Exiting..." RESET << std::endl, 0);
 		else
-			std::cout << "Invalid selection." << std::endl;
+			std::cout << BG_RED "Invalid selection." RESET << std::endl;
 	}
 	return (0);
 }

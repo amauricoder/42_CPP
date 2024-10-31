@@ -1,21 +1,32 @@
 #include "Contact.hpp"
 
+//Constructor
 Contact::Contact()
 {
-	first_name = " ";
-	last_name = " ";
-	nick_name = " ";
-	phone_number = " ";
-	darkest_secret = " ";
+	first_name = "";
+	last_name = "";
+	nick_name = "";
+	phone_number = "";
+	darkest_secret = "";
 }
 
+//Destructor
 Contact::~Contact()
 {
 	
 }
-//	************ Setter Functions ************
+//Setter
+/**
+ * @brief Set the contact information with the input
+ * useful -> https://www.geeksforgeeks.org/std-string-replace-in-cpp/
+ */
 void	Contact::setContactInfo(std::string input, std::string type)
 {
+	if (input.length() > 10)
+	{
+		input.resize(10);
+		input.replace(9, 1, 1, '.');
+	}
 	if (type == "name")
 		first_name = input;
 	else if (type == "last")
@@ -28,7 +39,7 @@ void	Contact::setContactInfo(std::string input, std::string type)
 		darkest_secret = input;
 }
 
-//	************ Getter Functions ************
+//Getters
 std::string	Contact::getFirstName()
 {
 	return (this->first_name);

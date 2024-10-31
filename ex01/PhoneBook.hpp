@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/24 00:13:09 by aconceic          #+#    #+#             */
-/*   Updated: 2024/10/21 16:46:58 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/10/31 16:00:07 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,11 @@
 
 #include <iostream>
 #include <iomanip>
-#include <cstdlib> // For std::exit()
+#include <cstdlib> //For std::exit()
 #include <string>
 #include <cctype> //isdigit
 #include "Contact.hpp"
+#include "Print.hpp"
 
 class	PhoneBook
 {
@@ -34,14 +35,9 @@ class	PhoneBook
 		void	addContact();
 		int		searchContactInfo();
 		void	contactList();
-		void	print_contact_secrets(int id);
+		int		print_contact_secrets(int id);
 };
 
-int		isInputValid(std::string input, std::string type);
-void	print_header(void);
-void	print_options(std::string menu);
-void    print_clist_header(void);
-void	print_clist_column(void);
-void	print_contact_info(Contact contact, int i);
+bool	isInputValid(std::string input, std::string type);
 
 #endif
