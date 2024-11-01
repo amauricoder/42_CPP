@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/07/26 14:13:16 by aconceic          #+#    #+#             */
-/*   Updated: 2024/10/31 17:33:57 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/01 13:16:58 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -106,7 +106,7 @@ void    PhoneBook::contactList()
  */
 bool		isInputValid(std::string input, std::string type)
 {
-	if (input.empty() == true)
+	if (input.empty() == true || input == " ")
 		return (std::cout << BG_RED "Empty fields are not allowed!" RESET << std::endl, false);
 	if (type == "number")
 	{
@@ -128,6 +128,15 @@ bool		isInputValid(std::string input, std::string type)
 		}
 		if (input.find("  ") != std::string::npos)
 			return (std::cout << BG_RED "Invalid Character!" RESET << std::endl, false);
+		if (input.length() < 3)
+			return (std::cout << BG_RED "Name must have at least 3 char" RESET << std::endl, false);
+	}
+	else if (type == "nick")
+	{
+		if (input.find("  ") != std::string::npos)
+			return (std::cout << BG_RED "Invalid Name!" RESET << std::endl, false);
+		if (input.length() < 3)
+			return (std::cout << BG_RED "Name must have at least 3 char" RESET << std::endl, false);
 	}
 	if (type == "id")
 	{

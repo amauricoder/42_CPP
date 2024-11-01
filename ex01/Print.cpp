@@ -113,6 +113,7 @@ int	PhoneBook::print_contact_secrets(int id)
 		return (1);
 	}
 	std::cout
+		<< "\n"
 		<< "|"
 		<< std::setw(10)
         << "Phone"
@@ -122,12 +123,14 @@ int	PhoneBook::print_contact_secrets(int id)
 		<< "|"
 	<< std::endl;
 	std::cout
+		<< "|"
         << std::setw(10)
-        << contacts[id - 1].getPhone()
+		<< contacts[id - 1].getPhone()
         << "|"
         << std::setw(10)
         << contacts[id - 1].getSecret()
         << "|"
+		<< "\n"
     << std::endl;
 	return (0);
 }
