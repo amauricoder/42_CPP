@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 14:02:36 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/01 15:56:03 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/01 16:02:07 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ std::string	Zombie::get_zombie_name(void)
 	return (this->name);	
 }
 
-
 void    Zombie::announce(void)
 {
 	std::string zombie_name = get_zombie_name();
@@ -47,3 +46,4 @@ void    Zombie::announce(void)
 		<< RED << zombie_name << RESET << BLACK ": BraiiiiiiinnnzzzZ..."RESET
 	<< std::endl;
 }
+
