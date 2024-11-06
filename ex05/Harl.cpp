@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:22:16 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/06 17:17:05 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/06 17:27:50 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,25 +31,18 @@ void	Harl::error(void)
 
 /**
  * @attention New Concept: Pointers to member functions
- * @brief 
  */
 void	Harl::complain(std::string level)
 {
 	std::string complain[] = {"debug", "info", "warning", "error"};
-	void (Harl::*arr[4])() = {&Harl::debug, &Harl::info, &Harl::warning, &Harl::error}; //pointer to member function
-	int	index = -1;
+	void (Harl::*arr[4])() = {&Harl::debug, &Harl::info,
+								&Harl::warning, &Harl::error};
 
 	for (int i = 0; i < 4; i ++)
 	{
 		if (!level.compare(complain[i]))
-		{
-			index = i;
-			break ;
-		}
+			return ((this->*arr[i])());
 	}
-	if (index == -1 || level.empty())
-		return ;
-	(this->*arr[index])();
 };
 
 /* 
