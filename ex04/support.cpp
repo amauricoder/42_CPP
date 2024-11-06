@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/05 16:02:22 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/06 15:14:31 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:05:04 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,14 +29,17 @@ int    err(std::string msg, int exit)
 int argument_error(int argc, char **argv)
 {
 	
-	std::string s1(argv[2]);
-	std::string s2(argv[3]);
-	if (argc != 4 || s1.empty() || s2.empty())
+	if (argc != 4 || !argv[2] || !argv[3])
 		return (err("Invalid Arguments", 1));
 
 	std::ifstream file_path(argv[1]);
 	if (file_path.fail())
 		return (err("Invalid File", 1));
+	
+	std::string s1(argv[2]);
+	std::string s2(argv[3]);
+	if (s1.empty() || s2.empty())
+		return (err("Empty Argument", 1));
 	return (0);
 }
 

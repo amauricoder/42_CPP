@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 17:48:48 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/06 18:53:51 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:00:39 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,9 +33,9 @@ static int	complain_level(std::string &input)
 
 int	main(int argc, char **argv)
 {
-	std::string input(argv[1]);
-	if (argc != 2 || input.empty())
+	if (argc != 2 || !argv)
 		return (err("Invalid Arguments", 1));
+	std::string input(argv[1]);
 	Harl man;
 	int level = complain_level(input);
 

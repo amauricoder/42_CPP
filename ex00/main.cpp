@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 14:18:01 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/01 15:52:16 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/06 19:09:05 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ int main(int argc, char **argv)
 {
 	(void)argv;
 	signal(SIGINT, SIG_IGN);
+	signal(SIGQUIT, SIG_IGN);
 	std::string input;
 
 	if (argc != 1)

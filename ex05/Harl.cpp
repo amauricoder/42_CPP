@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/06 15:22:16 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/06 17:27:50 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/06 18:58:02 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ void	Harl::complain(std::string level)
 		if (!level.compare(complain[i]))
 			return ((this->*arr[i])());
 	}
+	std::cout << "Not a valid complain" << std::endl;
 };
 
 /* 
