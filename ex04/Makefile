@@ -6,7 +6,7 @@
 #    By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/01 13:27:28 by aconceic          #+#    #+#              #
-#    Updated: 2024/11/05 16:02:30 by aconceic         ###   ########.fr        #
+#    Updated: 2024/11/06 12:09:06 by aconceic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = ex04
-SRC = validation.cpp \
+SRC = support.cpp \
 
 OBJ_DIR = ./objs/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
