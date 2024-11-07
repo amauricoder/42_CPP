@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/01 16:01:01 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/05 12:27:38 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/07 15:52:57 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #define BG_MAGENTA  "\033[45m"
 #define RESET       "\033[0m"
 
+// useful -> https://medium.com/@the_infinity/references-in-c-987e592d901c
 int main(void)
 {
 	
