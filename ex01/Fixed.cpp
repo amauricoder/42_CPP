@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/18 17:31:02 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/18 18:24:20 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/19 18:42:53 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,7 +21,14 @@ Fixed::Fixed() : _fixed_point(0)
 
 Fixed::Fixed(const int x)
 {
-    _fixed_point = x * (1 << _fract_bits)
+    std::cout << "int Constructor Called" << std::endl;
+    _fixed_point = x << _fract_bits;
+}
+
+Fixed::Fixed(const float x)
+{
+    std::cout << "float Constructor Called" << std::endl;
+    _fixed_point = x * roundf((1 << _fract_bits));
 }
 
 Fixed::Fixed(const Fixed &obj)
@@ -45,7 +52,8 @@ Fixed::~Fixed()
     std::cout << "Destructor Called" << std::endl;
 }
 
-//getter
+//Member Functions
+
 int	Fixed::getRawBits(void) const
 {
 	std::cout << "getRawBits member function called" << std::endl;
@@ -56,3 +64,16 @@ void	Fixed::setRawBits(int const raw)
 {
 	this->_fixed_point = raw;	
 }
+
+float   Fixed::toFloat(void) const
+{
+    std::cout << "toFloat function called" << std::endl;
+    return (float)this->_fixed_point / (float)(1 << _fract_bits);
+}
+
+int     Fixed::toInt(void) const
+{
+    std::cout << "toInt function called" << std::endl;
+    return (this->_fixed_point >> Fixed::_fract_bits);
+}
+
