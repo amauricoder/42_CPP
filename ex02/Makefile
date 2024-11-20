@@ -6,14 +6,14 @@
 #    By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/11/07 15:57:47 by aconceic          #+#    #+#              #
-#    Updated: 2024/11/20 14:39:31 by aconceic         ###   ########.fr        #
+#    Updated: 2024/11/20 15:50:17 by aconceic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
-NAME = ex01
+NAME = ex02
 SRC = Fixed.cpp
 OBJ_DIR = ./objs/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
