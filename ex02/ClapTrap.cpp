@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:10:07 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/27 18:45:41 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/27 18:44:50 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ ClapTrap::ClapTrap() :  _name("Incognito"),
 						_energy_points(10),
 						_attack_damage(0)
 {
-	std::cout << "ClapTrap Default Constructor for " << _name << std::endl;
+	std::cout << "ClapTrap Default Constructor" << std::endl;
 }
 
 ClapTrap::ClapTrap(const ClapTrap &src)
@@ -51,7 +51,7 @@ ClapTrap::ClapTrap(std::string name) :  _hit_points(10),
 										_energy_points(10),
 										_attack_damage(0)
 {
-	std::cout << "ClapTrap String Constructor for " << std::endl;
+	std::cout << "ClapTrap String Constructor" << std::endl;
 	this->_name = name;
 }
 

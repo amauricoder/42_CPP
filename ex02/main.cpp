@@ -6,11 +6,13 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:07:56 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/28 15:18:56 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/28 16:45:16 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "ClapTrap.hpp"
+#include "ScavTrap.hpp"
+#include "FlagTrap.hpp"
 
 #define BG_GREEN    "\033[42m"
 #define BG_BLUE     "\033[44m"
@@ -20,46 +22,57 @@
 int main(void)
 {
 	{
-		//First test -> creating a ClapTrap without attributes
-		//and checking its values and member function
+		//test 1 - create FlagTrap without name and display
+		//member functions and values
 		unsigned int a_test_value = 10;
 		std::cout << BG_MAGENTA "1 Test" RESET << std::endl;
-		ClapTrap a;
-		a.attack("Paul Mccartney");
+		FlagTrap a;
+		a.attack("DigriJohnson");
 		a.beRepaired(a_test_value);
-		a.takeDamage(a_test_value);
+		a.takeDamage(5);
+		a.highFivesGuys();
 		a.printName();
 		a.printAttackDamage();
-		a.printHitPoints();
 		a.printEnergyPoints();
+		a.printHitPoints();
 	}
 	{
-		//Second test -> creating a Claptrap with name attribute
-		//and checking its value and member function
-		unsigned int a_test_value = 10;
+		//test 2 - test of copy assign operator
 		std::cout << BG_GREEN "2 Test" RESET << std::endl;
-		ClapTrap a("John Lennon");
-		a.attack("Paul Mccartney");
+		unsigned int a_test_value = 10;
+		FlagTrap b("bicho papao");
+		FlagTrap a;
+		
+		a = b;
+		a.attack("DigriJohnson");
 		a.beRepaired(a_test_value);
-		a.takeDamage(a_test_value);
+		a.takeDamage(5);
+		a.highFivesGuys();
 		a.printName();
 		a.printAttackDamage();
-		a.printHitPoints();
 		a.printEnergyPoints();
+		a.printHitPoints();
 	}
 	{
-		//3 test -> creating a ScavTrap with a name
-		//and a ScavTrap with a name, and testing
-		//the = assignment operator
-		std::cout << BG_GREEN "3 Test" RESET << std::endl;
-		ClapTrap a("Darth Vader");
-		ClapTrap b("Anakin Skywalker");
+		//test 3 - Test Copy Constructor
+		std::cout << BG_MAGENTA "3 Test" RESET << std::endl;
+		unsigned int a_test_value = 10;
+		FlagTrap a("General Kenobi");
 
+		a.attack("DigriJohnson");
+		a.beRepaired(a_test_value);
+		a.takeDamage(5);
+		a.highFivesGuys();
 		a.printName();
+		a.printAttackDamage();
+		a.printEnergyPoints();
+		a.printHitPoints();
+		FlagTrap b(a);
+		b.highFivesGuys();
 		b.printName();
-
-		a = b;
-		a.printName();
+		b.printAttackDamage();
+		b.printEnergyPoints();
+		b.printHitPoints();
 	}
 	return (0);
 }
