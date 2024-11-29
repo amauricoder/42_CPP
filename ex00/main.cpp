@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:07:56 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/28 15:18:56 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/29 13:52:05 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,6 +60,33 @@ int main(void)
 
 		a = b;
 		a.printName();
+	}
+	{
+		//4 test -> Ending energy points
+		std::cout << BG_MAGENTA "4 Test" RESET << std::endl;
+		ClapTrap bardo("Bardo");
+		bardo.attack("1");
+		bardo.attack("2");
+		bardo.attack("3");
+		bardo.attack("4");
+		bardo.attack("5");
+		bardo.attack("6");
+		bardo.attack("7");
+		bardo.attack("8");
+		bardo.attack("9");
+		bardo.attack("10");
+		//limit
+		bardo.attack("11");
+		bardo.attack("12");
+		bardo.beRepaired(2);
+	}
+	{
+		//5 test -> ending hit points
+		std::cout << BG_GREEN "5 Test" RESET << std::endl;
+		ClapTrap quinto("quinto");
+		quinto.takeDamage(10);
+		quinto.attack("qualquer");
+		quinto.beRepaired(10);
 	}
 	return (0);
 }

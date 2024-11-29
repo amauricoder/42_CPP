@@ -6,71 +6,50 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:07:56 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/29 16:38:56 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:52:55 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#include "DiamondTrap.hpp"
 
 #define BG_GREEN    "\033[42m"
 #define BG_BLUE     "\033[44m"
 #define BG_MAGENTA  "\033[45m"
 #define RESET       "\033[0m"
 
+//Quando usamos heranca virtual, a classe derivada mais baixa (a classe
+//que nao gherda de mais ninguem, como D) eh responsavel por
+//inicializar a classe base.
+//Usar virtual informa ao compilador que a classe base sera
+//compartilhada entre todas as classes derivadas.
 int main(void)
 {
 	{
-		//test 1 - create FlagTrap without name and display
-		//member functions and values
-		unsigned int a_test_value = 10;
+		//test 1 - Diamond Trap default constructor
+		//and whoAmI() member function, and values
 		std::cout << BG_MAGENTA "1 Test" RESET << std::endl;
-		FragTrap a;
-		a.attack("DigriJohnson");
-		a.beRepaired(a_test_value);
-		a.takeDamage(5);
-		a.highFivesGuys();
-		a.printName();
-		a.printAttackDamage();
+		DiamondTrap a("objeto");
+		a.printHitPoints(); 
 		a.printEnergyPoints();
-		a.printHitPoints();
+		a.printAttackDamage();
+		a.attack("objecto 2");
+		a.whoAmI();
 	}
 	{
-		//test 2 - test of copy assign operator
+		//test 2 - Diamond Trap default constructor
+		//and whoAmI() member function, and values
 		std::cout << BG_GREEN "2 Test" RESET << std::endl;
-		unsigned int a_test_value = 10;
-		FragTrap b("bicho papao");
-		FragTrap a;
-		
-		a = b;
-		a.attack("DigriJohnson");
-		a.beRepaired(a_test_value);
-		a.takeDamage(5);
-		a.highFivesGuys();
-		a.printName();
-		a.printAttackDamage();
+		DiamondTrap a;
+		a.printHitPoints(); 
 		a.printEnergyPoints();
-		a.printHitPoints();
-	}
-	{
-		//test 3 - Test Copy Constructor
-		std::cout << BG_MAGENTA "3 Test" RESET << std::endl;
-		unsigned int a_test_value = 10;
-		FragTrap a("General Kenobi");
-
-		a.attack("DigriJohnson");
-		a.beRepaired(a_test_value);
-		a.takeDamage(5);
-		a.highFivesGuys();
-		a.printName();
 		a.printAttackDamage();
-		a.printEnergyPoints();
-		a.printHitPoints();
-		FragTrap b(a);
-		b.highFivesGuys();
-		b.printName();
-		b.printAttackDamage();
-		b.printEnergyPoints();
-		b.printHitPoints();
+		a.attack("objecto 1");
+		a.takeDamage(110);
+		a.attack("Objecto 2");
+		a.beRepaired(5);
+		a.whoAmI();
 	}
 	return (0);
 }
+
+

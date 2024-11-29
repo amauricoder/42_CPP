@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/28 15:22:20 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/29 16:39:25 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/29 16:36:32 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*                     Orthodox Canonical Form                                */
 /******************************************************************************/
 
-FragTrap::FragTrap() : ClapTrap()
+FlagTrap::FlagTrap() : ClapTrap()
 {
 	std::cout << "FlagTrap Default Constructor" << std::endl;
 	this->_attack_damage = 30;
@@ -24,7 +24,7 @@ FragTrap::FragTrap() : ClapTrap()
 	this->_hit_points = 100;
 }
 
-FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src)
+FlagTrap::FlagTrap(const FlagTrap &src) : ClapTrap(src)
 {
 	std::cout << "FlagTrap copy Constructor" << std::endl;
 	this->_name = src._name;
@@ -33,7 +33,7 @@ FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src)
 	this->_hit_points = src._hit_points;
 }
 
-FragTrap& FragTrap::operator=(const FragTrap &src)
+FlagTrap& FlagTrap::operator=(const FlagTrap &src)
 {
 	std::cout << "FlagTrap overload =" << std::endl;
 	if (this != &src)
@@ -47,7 +47,7 @@ FragTrap& FragTrap::operator=(const FragTrap &src)
 }
 
 
-FragTrap::~FragTrap()
+FlagTrap::~FlagTrap()
 {
 	std::cout << "FlapTrap Destructor" << std::endl;
 }
@@ -56,7 +56,7 @@ FragTrap::~FragTrap()
 /*                    Constructor Requested by the subject                    */
 /******************************************************************************/
 
-FragTrap::FragTrap(std::string name) : ClapTrap(name)
+FlagTrap::FlagTrap(std::string name) : ClapTrap(name)
 {
 	std::cout << "FlagTrap String Constructor" << std::endl;
 	this->_attack_damage = 30;
@@ -68,7 +68,7 @@ FragTrap::FragTrap(std::string name) : ClapTrap(name)
 /*                    Member Function requested by the subject                */
 /******************************************************************************/
 
-void	FragTrap::highFivesGuys(void)
+void	FlagTrap::highFivesGuys(void)
 {
 	std::cout << this->_name << ": HI FIVE ?!?!" << std::endl;
 }

@@ -1,74 +1,71 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   FragTrap.cpp                                       :+:      :+:    :+:   */
+/*   ScavTrap.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/11/28 15:22:20 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/29 16:39:25 by aconceic         ###   ########.fr       */
+/*   Created: 2024/11/27 16:54:00 by aconceic          #+#    #+#             */
+/*   Updated: 2024/11/28 15:11:00 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "FragTrap.hpp"
+#include "ScavTrap.hpp"
 
 /******************************************************************************/
 /*                     Orthodox Canonical Form                                */
 /******************************************************************************/
 
-FragTrap::FragTrap() : ClapTrap()
+ScavTrap:: ScavTrap() : ClapTrap()
 {
-	std::cout << "FlagTrap Default Constructor" << std::endl;
-	this->_attack_damage = 30;
-	this ->_energy_points = 100;
+    std::cout <<  "ScavTrap Default Constructor" << std::endl;
 	this->_hit_points = 100;
+	this->_energy_points = 50;
+	this->_attack_damage = 20;
 }
 
-FragTrap::FragTrap(const FragTrap &src) : ClapTrap(src)
+ScavTrap::ScavTrap(const ScavTrap &copy) : ClapTrap(copy)
 {
-	std::cout << "FlagTrap copy Constructor" << std::endl;
-	this->_name = src._name;
-	this->_attack_damage = src._attack_damage;
-	this ->_energy_points = src._energy_points;
-	this->_hit_points = src._hit_points;
+	std::cout << "ScavTrap Copy Constructor" << std::endl;
+	this->_hit_points = 100;
+	this->_energy_points = 50;
+	this->_attack_damage = 20;
 }
 
-FragTrap& FragTrap::operator=(const FragTrap &src)
+ScavTrap &ScavTrap::operator=(const ScavTrap &src)
 {
-	std::cout << "FlagTrap overload =" << std::endl;
+	std::cout << "ScavTrap Copy Assignment operator" << std::endl; 
 	if (this != &src)
 	{
 		this->_name = src._name;
-		this->_attack_damage = src._attack_damage;
-		this ->_energy_points = src._energy_points;
 		this->_hit_points = src._hit_points;
+		this->_energy_points = src._energy_points;
+		this->_attack_damage = src._attack_damage;
 	}
 	return (*this);
 }
 
-
-FragTrap::~FragTrap()
+ScavTrap:: ~ScavTrap()
 {
-	std::cout << "FlapTrap Destructor" << std::endl;
+	std::cout << "ScavTrap Destructor" << std::endl; 
 }
 
 /******************************************************************************/
-/*                    Constructor Requested by the subject                    */
+/*                  Constructor Requested by the subject                      */
 /******************************************************************************/
-
-FragTrap::FragTrap(std::string name) : ClapTrap(name)
+ScavTrap:: ScavTrap(std::string name) : ClapTrap(name)
 {
-	std::cout << "FlagTrap String Constructor" << std::endl;
-	this->_attack_damage = 30;
-	this ->_energy_points = 100;
+	std::cout << "ScavTrap String Constructor" << std::endl;
 	this->_hit_points = 100;
+	this->_energy_points = 50;
+	this->_attack_damage = 20;
 }
 
 /******************************************************************************/
-/*                    Member Function requested by the subject                */
+/*                Member function requested by the subject                    */
 /******************************************************************************/
 
-void	FragTrap::highFivesGuys(void)
+void	ScavTrap::guardGate(void)
 {
-	std::cout << this->_name << ": HI FIVE ?!?!" << std::endl;
+	std::cout << this->_name << " is on Gate keeper mode" << std::endl;
 }

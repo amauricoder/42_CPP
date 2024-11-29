@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:10:07 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/27 18:44:50 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:01:53 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,7 +60,11 @@ ClapTrap::ClapTrap(std::string name) :  _hit_points(10),
 /******************************************************************************/
 void	ClapTrap::attack(const std::string& target)
 {	
-	if (this->_hit_points > 0)
+	if (this->_energy_points == 0)
+		std::cout << this->_name << " don't have enought energy points to attack" << std::endl;
+	else if (this->_hit_points == 0)
+		std::cout << this->_name << " don't have hit points to attack" << std::endl;
+	else
 	{
 		std::cout
 		<< this->_name << " attacks " << target << ", causing "
@@ -69,12 +73,7 @@ void	ClapTrap::attack(const std::string& target)
 		this->_energy_points --;
 		if (_energy_points < 0)
 			_energy_points = 0;
-		return ;
-	}
-	std::cout 
-	<< this->_name << " don't have enought energy points to attack - "
-	<< this->_energy_points << " left."
-	<< std::endl;	
+	}	
 }
 
 void	ClapTrap::takeDamage(unsigned int amount)
@@ -90,7 +89,11 @@ void	ClapTrap::takeDamage(unsigned int amount)
 
 void	ClapTrap::beRepaired(unsigned int amount)
 {
-	if (this->_energy_points > 0)
+	if (this->_energy_points == 0)
+		std::cout << this->_name << " don't have enought energy to repair itself." << std::endl;
+	else if (this->_hit_points == 0)
+		std::cout << this->_name << " let HitPoints get to 0, then you are not able to do anything" << std::endl;
+	else
 	{
 		std::cout << this->_name << " has repaired itself, and got " << amount 
 		<< " points back" << std::endl;	
@@ -98,12 +101,7 @@ void	ClapTrap::beRepaired(unsigned int amount)
 		this->_energy_points --;
 		if (_energy_points < 0)
 			_energy_points = 0;
-		return ;
 	}
-	std::cout
-	<< this->_name << " don't have enought energy points to repair itself - "
-	<< this->_energy_points << " left."
-	<< std::endl;	
 }
 
 /******************************************************************************/

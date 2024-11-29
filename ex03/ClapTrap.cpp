@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:10:07 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/29 15:01:53 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/29 15:01:15 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ ClapTrap&   ClapTrap::operator=(const ClapTrap &src)
 
 ClapTrap::~ClapTrap()
 {
-	std::cout << "ClapTrap Default Destructor" << std::endl;
+	std::cout << "ClapTrap Destructor" << std::endl;
 }
 
 /******************************************************************************/
