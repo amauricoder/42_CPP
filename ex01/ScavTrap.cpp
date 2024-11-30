@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:54:00 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/28 15:11:00 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:37:48 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,24 @@ ScavTrap:: ScavTrap(std::string name) : ClapTrap(name)
 	this->_hit_points = 100;
 	this->_energy_points = 50;
 	this->_attack_damage = 20;
+}
+
+void	ScavTrap::attack(const std::string& target)
+{	
+	if (this->_energy_points == 0)
+		std::cout << this->_name << "DIFFERENT MSG FOR ATTTACK - no energy points" << std::endl;
+	else if (this->_hit_points == 0)
+		std::cout << this->_name << "DIFFERENT MSG FOR ATTTACK - no hit points" << std::endl;
+	else
+	{
+		std::cout
+		<< this->_name << " DIFFERENT MSG FOR ATTTACK - attacks " << target << ", causing "
+		<< this->_attack_damage << " points of damage - DIFFERENT MSG FOR ATTTACK!"
+		<< std::endl;
+		this->_energy_points --;
+		if (_energy_points < 0)
+			_energy_points = 0;
+	}	
 }
 
 /******************************************************************************/

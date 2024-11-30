@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:54:00 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/28 15:11:00 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:52:31 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,4 +68,26 @@ ScavTrap:: ScavTrap(std::string name) : ClapTrap(name)
 void	ScavTrap::guardGate(void)
 {
 	std::cout << this->_name << " is on Gate keeper mode" << std::endl;
+}
+
+/******************************************************************************/
+/*                attack with other msg                                       */
+/******************************************************************************/
+
+void	ScavTrap::attack(const std::string& target)
+{	
+	if (this->_energy_points == 0)
+		std::cout << this->_name << "DIFFERENT MSG FOR ATTTACK - no energy points" << std::endl;
+	else if (this->_hit_points == 0)
+		std::cout << this->_name << "DIFFERENT MSG FOR ATTTACK - no hit points" << std::endl;
+	else
+	{
+		std::cout
+		<< this->_name << " DIFFERENT MSG FOR ATTTACK - attacks " << target << ", causing "
+		<< this->_attack_damage << " points of damage - DIFFERENT MSG FOR ATTTACK!"
+		<< std::endl;
+		this->_energy_points --;
+		if (_energy_points < 0)
+			_energy_points = 0;
+	}	
 }

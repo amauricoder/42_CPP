@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:07:56 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/29 16:52:55 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/11/30 16:54:47 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,10 +44,19 @@ int main(void)
 		a.printEnergyPoints();
 		a.printAttackDamage();
 		a.attack("objecto 1");
+		a.attack("objecto 1");
+		a.attack("objecto 1");
+		a.attack("objecto 1");
 		a.takeDamage(110);
 		a.attack("Objecto 2");
 		a.beRepaired(5);
 		a.whoAmI();
+	}
+	{
+		//test 3 - ScavTrap attack
+		std::cout << BG_MAGENTA "3 Test" RESET << std::endl;
+		ScavTrap test("test");
+		test.attack("teste 2");
 	}
 	return (0);
 }
