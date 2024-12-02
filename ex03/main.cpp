@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/25 15:07:56 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/30 16:54:47 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/02 15:13:34 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,6 +57,14 @@ int main(void)
 		std::cout << BG_MAGENTA "3 Test" RESET << std::endl;
 		ScavTrap test("test");
 		test.attack("teste 2");
+	}
+	{
+		//test 4 - ScavTrap copy constructor
+		std::cout << BG_GREEN "4 Test" RESET << std::endl;
+		DiamondTrap copy("copy");
+		DiamondTrap copy2(copy);
+
+		copy2.whoAmI();
 	}
 	return (0);
 }
