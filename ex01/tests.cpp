@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:53:34 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/09 16:30:51 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:31:04 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -139,4 +139,15 @@ void	test_deep_copies(void)
 	delete dog;
 	delete cat;
 	std::cout << BG_BLUE "END deep copies" RESET << std::endl;
+}
+
+void    test_brain_constructor(void)
+{
+	std::cout << BG_MAGENTA "TEST BRAIN deep copies" RESET << std::endl;
+	Brain	brain;
+	Brain	brain2;
+	brain = brain2;
+
+	Brain brain3(brain);
+	std::cout << BG_MAGENTA "TEST BRAIN deep copies" RESET << std::endl;
 }

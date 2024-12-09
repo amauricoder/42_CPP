@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:35:32 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/03 18:42:03 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/09 18:26:04 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,8 +30,10 @@ Brain::Brain()
 
 Brain::Brain(const Brain &src)
 {
-	std::cout << "Brain Copy Constructor" << std::endl;	
-    this->_ideas = src._ideas;
+	std::cout << "Brain Copy Constructor" << std::endl;
+	this->_ideas = new std::string[100];
+	for (int i = 0; i < 100; i++)
+		this->_ideas[i] = src._ideas[i];
 }
 
 Brain& Brain::operator=(const Brain &src)
@@ -39,7 +41,10 @@ Brain& Brain::operator=(const Brain &src)
 	std::cout << "Brain Assign Operator" << std::endl;	
     if (this != &src)
 	{
-	    this->_ideas = src._ideas;
+		delete[] this->_ideas;
+		this->_ideas = new std::string[100];
+	    for (int i = 0; i < 100; i++)
+			this->_ideas[i] = src._ideas[i];
 	}
 	return (*this);
 }
