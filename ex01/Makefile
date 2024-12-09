@@ -6,7 +6,7 @@
 #    By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 14:51:24 by aconceic          #+#    #+#              #
-#    Updated: 2024/12/03 17:36:14 by aconceic         ###   ########.fr        #
+#    Updated: 2024/12/09 16:13:15 by aconceic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = c++
 CFLAGS = -Wall -Wextra -Werror -std=c++98
 
 NAME = ex01
-SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp\
+SRC = main.cpp Animal.cpp Dog.cpp Cat.cpp Brain.cpp tests.cpp \
 
 OBJ_DIR = ./objs/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))

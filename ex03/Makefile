@@ -6,7 +6,7 @@
 #    By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 14:51:24 by aconceic          #+#    #+#              #
-#    Updated: 2024/12/09 12:54:19 by aconceic         ###   ########.fr        #
+#    Updated: 2024/12/09 16:41:19 by aconceic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -14,7 +14,7 @@ CC = c++
 CFLAGS = -g -Wall -Wextra -Werror -std=c++98
 
 NAME = ex03
-SRC = main.cpp Character.cpp AMateria.cpp Ice.cpp Cure.cpp MateriaSource.cpp \
+SRC = main.cpp Character.cpp AMateria.cpp Ice.cpp Cure.cpp MateriaSource.cpp tests.cpp\
 
 OBJ_DIR = ./objs/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))

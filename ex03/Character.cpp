@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 21:38:01 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/09 15:33:31 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/09 17:47:39 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -108,7 +108,10 @@ std::string const & Character::getName() const
 void Character::equip(AMateria* m)
 {
 	if (!m)
+	{
+		std::cout << "Not possible to equip NULL materia" << std::endl;
 		return ;
+	}
 	if (m->getIsEquiped())
 	{
 		std::cout << "Equipament already equiped" << std::endl;
