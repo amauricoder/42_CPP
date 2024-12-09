@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:47:05 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/07 21:16:34 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:00:34 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@
 
 Cure::Cure() : AMateria()
 {
-	std::cout << "Cure Default Constructor" << std::endl;
+	//std::cout << "Cure Default Constructor" << std::endl;
+	this->p_type = "cure";
 }
 
 Cure::Cure(const Cure &src) : AMateria(src)
 {
-	std::cout << "Cure Copy Constructor" << std::endl;
+	//std::cout << "Cure Copy Constructor" << std::endl;
 }
 
 Cure& Cure::operator=(const Cure &src)
 {
-	std::cout << "Cure assignment operator" << std::endl;
+	//std::cout << "Cure assignment operator" << std::endl;
 	if (this != &src)
 	{
 		//only const att
@@ -38,7 +39,7 @@ Cure& Cure::operator=(const Cure &src)
 
 Cure::~Cure()
 {
-	std::cout << "Cure Destructor" << std::endl;	
+	//std::cout << "Cure Destructor" << std::endl;	
 }
 
 /*************************************/
@@ -46,7 +47,7 @@ Cure::~Cure()
 /*************************************/
 Cure::Cure(std::string type) : AMateria(type + "_abs")
 {
-	std::cout << "string constructor" << std::endl;
+	//std::cout << "string constructor" << std::endl;
 	this->p_type = type;
 }
 

@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 18:45:59 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/07 21:20:56 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/09 11:52:26 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,17 +18,18 @@
 
 Ice::Ice() : AMateria()
 {
-	std::cout << "Ice Default Constructor" << std::endl;
+	//std::cout << "Ice Default Constructor" << std::endl;
+	this->p_type = "ice";
 }
 
 Ice::Ice(const Ice &src) : AMateria(src)
 {
-	std::cout << "Ice Copy Constructor" << std::endl;
+	//std::cout << "Ice Copy Constructor" << std::endl;
 }
 
 Ice& Ice::operator=(const Ice &src)
 {
-	std::cout << "Ice assignment operator" << std::endl;
+	//std::cout << "Ice assignment operator" << std::endl;
 	if (this != &src)
 	{
 		//no need to copy the type
@@ -38,14 +39,14 @@ Ice& Ice::operator=(const Ice &src)
 
 Ice::~Ice()
 {
-	std::cout << "Ice Destructor" << std::endl;	
+	//std::cout << "Ice Destructor" << std::endl;	
 }
 /*************************************/
 /*             CONSTRUCTOR           */
 /*************************************/
 Ice::Ice(std::string type) : AMateria(type + "_abs")
 {
-	std::cout << "Ice string constructor" << std::endl;
+	//std::cout << "Ice string constructor" << std::endl;
 	this->p_type = type;
 }
 

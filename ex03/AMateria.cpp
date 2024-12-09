@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 14:59:47 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/07 19:29:53 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/09 15:02:34 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,14 +15,14 @@
 /*****************************************/
 /*                 ORTHODOX              */
 /*****************************************/
-AMateria::AMateria() : p_type("default")
+AMateria::AMateria() : p_type("none"), is_equiped(0)
 {
-	std::cout << "AMateria Default Constructor" << std::endl;
+	//std::cout << "AMateria Default Constructor" << std::endl;
 }
 
-AMateria::AMateria(const AMateria &src) : p_type(src.p_type)
+AMateria::AMateria(const AMateria &src) : p_type(src.p_type), is_equiped(0)
 {
-	std::cout << "AMateria Copy Constructor" << std::endl;
+	//std::cout << "AMateria Copy Constructor" << std::endl;
 }
 
 AMateria& AMateria::operator=(const AMateria &src)
@@ -31,23 +31,24 @@ AMateria& AMateria::operator=(const AMateria &src)
 	if (this != &src)
 	{
 		//copy
-		std::cout << "AMateria Copy Constructor" << std::endl;
+		//std::cout << "AMateria Copy Constructor" << std::endl;
 		//constant value is the same for both, no need to copy
+		this->is_equiped = this->getIsEquiped();
 	}
 	return (*this);
 }
 
 AMateria::~AMateria()
 {
-	std::cout << "AMateria Destructor" << std::endl;
+	//std::cout << "AMateria Destructor" << std::endl;
 }
 /*****************************************/
 /*                CONSTRUCTOR            */
 /*****************************************/
 
-AMateria::AMateria(std::string const & type) : p_type(type)
+AMateria::AMateria(std::string const & type) : p_type(type), is_equiped(0)
 {
-	std::cout << "AMateria String Constructor" << std::endl;
+	//std::cout << "AMateria String Constructor" << std::endl;
 }
 
 /*****************************************/
@@ -61,7 +62,21 @@ std::string const&  AMateria::getType() const
 }
 
 /*****************************************/
-/*                Member Functio         */
+/*            SETTER AND GETTER          */
+/*****************************************/
+
+void	AMateria::setIsEquiped(bool is)
+{
+	this->is_equiped = is;
+}
+
+bool	AMateria::getIsEquiped(void)
+{
+	return (this->is_equiped);
+}
+
+/*****************************************/
+/*                Member Function        */
 /*****************************************/
 void AMateria::use(ICharacter& target)
 {
