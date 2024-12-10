@@ -1,37 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   WrongCat.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 17:35:30 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/10 19:07:16 by aconceic         ###   ########.fr       */
+/*   Created: 2024/12/10 18:07:30 by aconceic          #+#    #+#             */
+/*   Updated: 2024/12/10 18:16:40 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRAIN_HPP
-#define BRAIN_HPP
+#ifndef WRONGCAT_HPP
+#define WRONGCAT_HPP
 
-#include "Animal.hpp"
+#include "WrongAnimal.hpp"
 
-class Brain
+class WrongCat : public WrongAnimal
 {
-	private:
-		std::string	*_ideas;
 	public:
-		//orthodox canonical form
-		Brain();
-		Brain(const Brain &src);
-		Brain& operator=(const Brain &src);
-		~Brain();
-	//getter
-		std::string getIdea(int	index);
-	//setter
-		void		setIdea(std::string new_idea, int index);
-	//Debug
-		void	printIdeas();
-	
+		//Orthodox Canonical
+		WrongCat();
+		WrongCat(const WrongCat &src);
+		WrongCat& operator=(const WrongCat &src);
+		~WrongCat();
+		void	makeSound() const;
 };
 
 #endif

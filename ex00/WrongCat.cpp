@@ -1,35 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Dog.cpp                                            :+:      :+:    :+:   */
+/*   WrongCat.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 15:10:14 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/10 18:23:16 by aconceic         ###   ########.fr       */
+/*   Created: 2024/12/10 18:07:28 by aconceic          #+#    #+#             */
+/*   Updated: 2024/12/10 18:27:50 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "Dog.hpp"
+#include "WrongCat.hpp"
 
 /**************************************************/
 /*                Orthodox Canonical              */
 /**************************************************/
-Dog::Dog() : Animal()
+WrongCat::WrongCat() : WrongAnimal()
 {
-	std::cout << "Dog Constructor" << std::endl;
-	this->p_type = "Dog";
+	std::cout << "WrongCat Constructor" << std::endl;
+	this->p_type = "WrongCat";
 }
 
-Dog::Dog(const Dog &src) : Animal(src)
+WrongCat::WrongCat(const WrongCat &src) : WrongAnimal(src)
 {
-	std::cout << "Dog Copy Constructor" << std::endl;
+	std::cout << "WrongCat Copy Constructor" << std::endl;
 	this->p_type = src.p_type;
 }
 
-Dog&	Dog::operator=(const Dog &src)
+WrongCat&	WrongCat::operator=(const WrongCat &src)
 {
-	std::cout << "Dog Assign Operator" << std::endl;
+	std::cout << "WrongCat Assign Operator" << std::endl;
 	if (this != &src)
 	{
 		this->p_type = src.p_type;
@@ -37,20 +37,13 @@ Dog&	Dog::operator=(const Dog &src)
 	return (*this);
 }
 
-Dog::~Dog()
+WrongCat::~WrongCat()
 {
-	std::cout << "Dog Destructor" << std::endl;
+	std::cout << "WrongCat Destructor" << std::endl;
 }
-
 
 //Member function to makeSound
-void	Dog::makeSound() const
+void	WrongCat::makeSound() const
 {
-	std::cout << "AUUUUU AUUUUU" << std::endl;
-}
-
-//To Debug
-void	Dog::printDogType()
-{
-	std::cout << this->p_type << std::endl;
+	std::cout << "OOOOOOOOOOOOOTROOOO GATO" << std::endl;
 }

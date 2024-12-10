@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:35:32 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/09 18:26:04 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:17:30 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ Brain::Brain()
 		std::ostringstream oss;
 		oss << i;
 		std::string nbr = oss.str();
-		this->_ideas[i] = "Idea " + nbr + " added to the brain";
+		this->_ideas[i] = "Idea added -> " + nbr;
 	}
 }
 
@@ -62,7 +62,7 @@ Brain::~Brain()
 void	Brain::printIdeas()
 {
 	for (int i = 0; i < 100; i ++)
-		std::cout << this->_ideas[i] << std::endl;
+		std::cout << this->_ideas[i] << " address : "<< &this->_ideas[i] << std::endl;
 }
 
 /***************************************/
@@ -72,3 +72,13 @@ std::string	Brain::getIdea(int	index)
 {
 	return (this->_ideas[index]);
 }
+
+/***************************************/
+/*                Setter               */
+/***************************************/
+void		Brain::setIdea(std::string new_idea, int index)
+{
+	if (index > 99 || index < 0)
+		return ;
+	this->_ideas[index] = new_idea;
+};

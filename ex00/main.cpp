@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:51:57 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/09 16:10:40 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:22:57 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int main(void)
 	test_inherit_dog_make_sound();
 	test_inherit_cat_make_sound();
 	test_subject();
+	test_wrong_animal();
 	return (0);
 }

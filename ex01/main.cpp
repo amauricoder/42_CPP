@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 14:51:57 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/09 18:26:58 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:21:23 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,7 @@ int main(void)
 	test_half_cats_and_dogs_in_array();
 	test_deep_copies();
 	test_brain_constructor();
+	test_assign_dog();
+	test_deep_dog();
 	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:56:11 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/09 16:09:08 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:24:51 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,8 @@
 #include "Animal.hpp"
 #include "Cat.hpp"
 #include "Dog.hpp"
+#include "WrongAnimal.hpp"
+#include "WrongCat.hpp"
 
 #define BG_GREEN    "\033[42m"
 #define BG_BLUE     "\033[44m"
@@ -29,6 +31,6 @@ void    test_animal_make_sound(void);
 void    test_inherit_dog_make_sound(void);
 void    test_inherit_cat_make_sound(void);
 void	test_subject(void);
-
+void    test_wrong_animal(void);
 
 #endif

@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:53:34 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/09 18:31:04 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/10 20:24:23 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -151,3 +151,38 @@ void    test_brain_constructor(void)
 	Brain brain3(brain);
 	std::cout << BG_MAGENTA "TEST BRAIN deep copies" RESET << std::endl;
 }
+
+void	test_assign_dog(void)
+{
+	std::cout << BG_BLUE "TEST dog copies" RESET << std::endl;
+	Dog snoopy;
+	Dog	scooby;
+
+	scooby = snoopy;
+
+	std::cout << &snoopy << " " << &scooby << std::endl;
+
+	std::cout << BG_BLUE "END TEST deep dog copies" RESET << std::endl;
+}
+
+void	test_deep_dog(void)
+{
+	std::cout << BG_MAGENTA "TEST dog copies" RESET << std::endl;
+
+	Dog originalDog;
+	originalDog.printDogIdeas();
+
+	Dog copyDog = originalDog;
+
+	std::cout << BG_ORANGE "MODIFY ORIGINAL DOG BRAIN" RESET << std::endl;
+	for (int i = 0; i < 100; i++)
+		originalDog.getBrain()->setIdea("New Idea", i);
+	
+	std::cout << "\nOriginal Dog's Ideas After Modification:\n";
+    originalDog.printDogIdeas();
+
+    std::cout << "\nCopied Dog's Ideas Should Be Unchanged:\n";
+    copyDog.printDogIdeas();
+	std::cout << BG_MAGENTA "END TEST deep dog copies" RESET << std::endl;
+}
+

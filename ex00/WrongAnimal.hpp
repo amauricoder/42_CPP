@@ -1,37 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   Brain.hpp                                          :+:      :+:    :+:   */
+/*   WrongAnimal.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/12/03 17:35:30 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/10 19:07:16 by aconceic         ###   ########.fr       */
+/*   Created: 2024/12/10 18:10:00 by aconceic          #+#    #+#             */
+/*   Updated: 2024/12/10 18:16:14 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BRAIN_HPP
-#define BRAIN_HPP
+#ifndef WRONGANIMAL_HPP
+#define WRONGANIMAL_HPP
 
-#include "Animal.hpp"
+#include <iostream>
 
-class Brain
+class WrongAnimal
 {
-	private:
-		std::string	*_ideas;
+	protected:
+		std::string	p_type;
 	public:
-		//orthodox canonical form
-		Brain();
-		Brain(const Brain &src);
-		Brain& operator=(const Brain &src);
-		~Brain();
-	//getter
-		std::string getIdea(int	index);
-	//setter
-		void		setIdea(std::string new_idea, int index);
-	//Debug
-		void	printIdeas();
-	
+	//Orthodox Canonical
+		WrongAnimal();
+		WrongAnimal(const WrongAnimal &src);
+		WrongAnimal& operator=(const  WrongAnimal &src);
+		virtual ~WrongAnimal();
+	//Member functions
+		virtual void	makeSound() const;
+	//asked for the subject indirectly
+		virtual std::string getType() const;
 };
 
 #endif

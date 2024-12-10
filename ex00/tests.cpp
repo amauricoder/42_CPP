@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:53:34 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/09 16:09:26 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/10 18:27:06 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,3 +71,16 @@ void	test_subject(void)
 	delete i;
 	delete j;
 }
+
+void	test_wrong_animal()
+{
+	std::cout << BG_MAGENTA "TEST Wrong Animal" << RESET << std::endl;
+
+	const WrongAnimal* meta = new WrongAnimal();
+	const WrongAnimal* i = new WrongCat();
+	std::cout << i->getType() << " " << std::endl;
+	i->makeSound(); //will output the wrong cat sound!
+	meta->makeSound();
+	delete meta;
+	delete i;
+};

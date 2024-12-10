@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:40:57 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/09 17:57:19 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/10 13:31:29 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,7 +86,8 @@ void    test_characteres(void)
 	AMateria* creation1 = src->createMateria("ice");
 	AMateria* creation2 = src->createMateria("cure");
 
-	//equip materias 
+	//equip materias
+	
 	presto->equip(creation1); //[0] ice
 	presto->equip(creation2); //[1] cure
 	presto->equip(creation1); //try to equip an already filled Materia (must retorn error)
@@ -121,6 +122,10 @@ void    test_characteres(void)
 	presto->use(0, *alvo); //should print error msg
 	presto->use(1, *alvo); //should print error msg
 
+	creation1->setIsEquiped(0);
+	presto->equip(creation1);
+	presto->use(0, *alvo);
+	
 	delete src;
 	delete presto;
 	delete alvo;

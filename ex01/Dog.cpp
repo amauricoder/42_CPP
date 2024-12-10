@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:10:14 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/03 18:56:58 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/10 19:22:00 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ Dog::Dog(const Dog &src) : Animal(src)
 {
 	std::cout << "Dog Copy Constructor" << std::endl;
 	this->p_type = src.p_type;
+    this->_idea = new Brain(*src._idea);
 }
 
 Dog&	Dog::operator=(const Dog &src)
@@ -34,6 +35,11 @@ Dog&	Dog::operator=(const Dog &src)
 	if (this != &src)
 	{
 		this->p_type = src.p_type;
+        if (this->_idea)
+		{
+            delete this->_idea; // Delete the existing Brain
+        }
+        this->_idea = new Brain(*src._idea); 
 	}
 	return (*this);
 }
@@ -51,6 +57,16 @@ void	Dog::makeSound() const
 	std::cout << "AUUUUU AUUUUU" << std::endl;
 }
 
+/**************************************************/
+/*                      GETTER                    */
+/**************************************************/
+
+Brain*	Dog::getBrain(void)
+{
+	return (this->_idea);
+};
+
+
 //To Debug
 void	Dog::printDogType()
 {
@@ -60,5 +76,5 @@ void	Dog::printDogType()
 void	Dog::printDogIdeas()
 {
 	for (int i = 0; i < 100; i ++)
-		std::cout << "\033[45mDog idea\033[0m " << this->_idea->getIdea(i) << std::endl;
+		std::cout << this->_idea->getIdea(i) << std::endl;
 }
