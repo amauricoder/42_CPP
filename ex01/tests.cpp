@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 15:53:34 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/10 20:24:23 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:53:29 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -130,9 +130,17 @@ void	test_deep_copies(void)
 	//see if they are deep copies
 	std::cout << BG_BLUE "TEST deep copies" RESET << std::endl;
 	Animal *dog = new Dog;
+	Animal *dogcpy = dog;
+
 	dog->makeSound(); // need to auau.
+	std::cout << "Dog address memory : " << &dog << "\n"
+	<< "Dog Copy address memory : " << &dogcpy  << std::endl;
+
 	Animal *cat = new Cat;
+	Animal *catcpy = cat;
 	cat->makeSound(); // need to meow
+	std::cout << "Cat address memory : " << &cat << "\n"
+	<< "Cat Copy address memory : " << &catcpy << std::endl;
 	
 	//If they were now deep copies, they would do the 
 	//makeSound of the main Class.
@@ -141,20 +149,41 @@ void	test_deep_copies(void)
 	std::cout << BG_BLUE "END deep copies" RESET << std::endl;
 }
 
-void    test_brain_constructor(void)
+void test_brain_constructor_and_deep_copies(void)
 {
-	std::cout << BG_MAGENTA "TEST BRAIN deep copies" RESET << std::endl;
-	Brain	brain;
-	Brain	brain2;
-	brain = brain2;
+    std::cout << BG_ORANGE "TEST BRAIN constructor and deep copies" RESET << std::endl;
 
-	Brain brain3(brain);
-	std::cout << BG_MAGENTA "TEST BRAIN deep copies" RESET << std::endl;
+    Brain brain;
+    std::cout << "brain memory address       : " << &brain << std::endl;
+    std::cout << "brain._ideas memory address: " << brain.getIdeasAddress() << std::endl;
+
+    Brain brain2;
+    std::cout << "brain2 memory address       : " << &brain2 << std::endl;
+    std::cout << "brain2._ideas memory address: " << brain2.getIdeasAddress() << std::endl;
+
+    // Assignment
+    brain = brain2;
+	std::cout << "ATTENTTION HERE -> THIS FUCKING 42 PC IS ALLOCATING FOR THE SAME MEMORY ADDRESS AFTER DELETE IN BRAIN. YOU WILL NEED TO SHOW THIS TO EVALUATOR AND SHOW DEBUG CASE IN BRAIN ASSIGNMENT OPERATOR." << std::endl;
+    std::cout << "After assignment:" << std::endl;
+    std::cout << "brain memory address       : " << &brain << std::endl;
+    std::cout << "brain._ideas memory address: " << brain.getIdeasAddress() << std::endl;
+
+	std::cout << "Modifying idea in brain (brain2 must be unchanged)" << std::endl;
+	brain.setIdea("NEW IDEA IN BRAIN(NOT BRAIN2)", 0);
+	std::cout << "Print idea brain : " << brain.getIdea(0) << std::endl;
+	std::cout << "Print idea brain2 : " << brain2.getIdea(0) << std::endl;
+	
+    // Copy Constructor
+    Brain brain3(brain);
+    std::cout << "brain3 memory address       : " << &brain3 << std::endl;
+    std::cout << "brain3._ideas memory address: " << brain3.getIdeasAddress() << std::endl;
+
+    std::cout << BG_ORANGE "END TEST BRAIN constructor and deep copies" RESET << std::endl;
 }
 
 void	test_assign_dog(void)
 {
-	std::cout << BG_BLUE "TEST dog copies" RESET << std::endl;
+	std::cout << BG_BLUE "TEST dog assignment operator" RESET << std::endl;
 	Dog snoopy;
 	Dog	scooby;
 
@@ -162,12 +191,12 @@ void	test_assign_dog(void)
 
 	std::cout << &snoopy << " " << &scooby << std::endl;
 
-	std::cout << BG_BLUE "END TEST deep dog copies" RESET << std::endl;
+	std::cout << BG_BLUE "END TEST TEST dog assignment operator" RESET << std::endl;
 }
 
 void	test_deep_dog(void)
 {
-	std::cout << BG_MAGENTA "TEST dog copies" RESET << std::endl;
+	std::cout << BG_MAGENTA "TEST deep dog" RESET << std::endl;
 
 	Dog originalDog;
 	originalDog.printDogIdeas();
@@ -183,6 +212,14 @@ void	test_deep_dog(void)
 
     std::cout << "\nCopied Dog's Ideas Should Be Unchanged:\n";
     copyDog.printDogIdeas();
-	std::cout << BG_MAGENTA "END TEST deep dog copies" RESET << std::endl;
+	std::cout << BG_MAGENTA "END TEST deep dog" RESET << std::endl;
 }
 
+void	test_evaluation_sheet(void)
+{
+	std::cout << BG_MAGENTA "TEST evaluation sheet" RESET << std::endl;
+	Dog basic;
+	Dog tmp = basic;
+	Dog tmp2(basic);
+	std::cout << BG_MAGENTA "END TEST evaluation sheet" RESET << std::endl;
+}

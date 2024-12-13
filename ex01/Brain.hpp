@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 17:35:30 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/10 19:07:16 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:46:19 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,7 @@ class Brain
 		void		setIdea(std::string new_idea, int index);
 	//Debug
 		void	printIdeas();
+		std::string*	getIdeasAddress();
 	
 };
 

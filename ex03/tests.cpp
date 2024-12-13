@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 16:40:57 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/10 13:31:29 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:19:59 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -85,9 +85,8 @@ void    test_characteres(void)
 	src->learnMateria(cure_materia);
 	AMateria* creation1 = src->createMateria("ice");
 	AMateria* creation2 = src->createMateria("cure");
-
-	//equip materias
 	
+	//equip materias
 	presto->equip(creation1); //[0] ice
 	presto->equip(creation2); //[1] cure
 	presto->equip(creation1); //try to equip an already filled Materia (must retorn error)
@@ -122,15 +121,24 @@ void    test_characteres(void)
 	presto->use(0, *alvo); //should print error msg
 	presto->use(1, *alvo); //should print error msg
 
-	creation1->setIsEquiped(0);
-	presto->equip(creation1);
-	presto->use(0, *alvo);
+	//try to used enquiped materias on another characther
+	//and use it.
+	ICharacter *merlin = new Character("merlin");
+	
+	merlin->equip(creation1); //[0]should equip
+	merlin->equip(creation2); //[1]should equip
+	merlin->equip(creation2); //should return error
+	
+	merlin->use(0, *alvo); //should print msg of use
+	merlin->use(1, *alvo);	//should print msg of use
+	
+	presto->unequip(0); //should unequip
+	presto->unequip(1); //should unequip
 	
 	delete src;
 	delete presto;
 	delete alvo;
-	delete creation1; //need to clean this if unequiped
-	delete creation2; //need to clean this if unequiped
+	delete merlin;
 	delete creation3;
 
 	std::cout << BG_MAGENTA "         END TEST CHARACTERES          " RESET << std::endl;

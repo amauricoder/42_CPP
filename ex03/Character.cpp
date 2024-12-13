@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 21:38:01 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/09 17:47:39 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:05:02 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -142,6 +142,8 @@ void Character::unequip(int idx)
 		std::cout << "Invalid Materia to unequip" << std::endl;
 		return ;
 	}
+	this->_inventory[idx]->setIsEquiped(0);
+	DroppedMateria::getInstance().addDropped(this->_inventory[idx]);
 	this->_inventory[idx] = NULL;
 }
 

@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:10:45 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/07 14:55:01 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/12 13:49:07 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,8 @@ class Dog : public AAnimal
 		Dog& operator=(const Dog &src);
 		~Dog();
 		void	makeSound() const;
+		//getter
+		Brain*	getBrain(void);
 		//debug
 		void	printDogType();
 		void	printDogIdeas();

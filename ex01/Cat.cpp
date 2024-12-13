@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/03 15:10:52 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/03 18:54:51 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/12 12:33:36 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,7 @@ Cat::Cat(const Cat &src) : Animal(src)
 {
 	std::cout << "Cat Copy Constructor" << std::endl;
 	this->p_type = src.p_type;
+    this->_idea = new Brain(*src._idea);
 }
 
 Cat&	Cat::operator=(const Cat &src)
@@ -34,6 +35,11 @@ Cat&	Cat::operator=(const Cat &src)
 	if (this != &src)
 	{
 		this->p_type = src.p_type;
+        if (this->_idea)
+		{
+            delete this->_idea; // Delete the existing Brain
+        }
+        this->_idea = new Brain(*src._idea); 
 	}
 	return (*this);
 }

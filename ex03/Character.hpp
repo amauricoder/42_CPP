@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/07 21:37:59 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/08 15:30:30 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/13 15:04:29 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 
 #include "ICharacter.hpp"
 #include "AMateria.hpp"
+#include "DroppedMaterias.hpp"
 
 class Character : public ICharacter
 {
