@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:29:22 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/14 20:59:30 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/14 23:04:47 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,16 +119,30 @@ Bureaucrat Bureaucrat::operator--(int)
     return temp; 
 }
 
+void			Bureaucrat::signForm(Form &f)
+{
+	try
+    {
+        f.beSigned(*this);
+    }
+    catch(const std::exception& e)
+    {
+        std::cerr << this->_name << " couldn't sign " << f.getName() << " because " << e.what() << '\n';
+		return ;
+    }
+	std::cout << this->_name << " signed " << f.getName() << std::endl;
+};
+
 /**************************************/
 /*              EXCEPTIONS            */
 /**************************************/
 
 const char * Bureaucrat::GradeTooHighException::what() const throw() {
-    return "Bureaucrat : Grade is too high!";
+    return "Grade is too high!";
 }
 
 const char * Bureaucrat::GradeTooLowException::what() const throw() {
-	return "Bureaucrat : Grade is too low!";
+	return "Grade is too low!";
 }
 
 /**************************************/
@@ -140,3 +154,4 @@ std::ostream& operator<<(std::ostream& os, const Bureaucrat &obj)
 	os << obj.getName() << ", bureaucrat grade " << obj.getGrade();
 	return (os);
 }
+
