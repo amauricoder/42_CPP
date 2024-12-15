@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:29:19 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 14:36:45 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:41:06 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ class Bureaucrat
 		Bureaucrat		operator++(int); //post increment
 		Bureaucrat		operator--(int); //post decrement
 		void			signForm(AForm &f);
+		int				executeForm(AForm const &form);
 		//exceptions
 		class GradeTooHighException : public std::exception
 		{

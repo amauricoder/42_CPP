@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 16:17:14 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 18:04:27 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:57:15 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ std::string RobotomyRequestForm::getTarget(void)
 /*         REQUIRED BY THE SUBJECT         */
 /*******************************************/
 
-int	RobotomyRequestForm::doRobotomy(void)
+int	RobotomyRequestForm::formAction(void) const
 {
 	static int n = 1;
 

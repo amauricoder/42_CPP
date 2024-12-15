@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:29:27 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/14 23:06:36 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 14:29:53 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,8 +84,8 @@ int main(void)
 		|| test_form_beSigned_not_possible())
 		return (EXIT_FAILURE);
 	
-	//Form b("formulario", 42, 13);
-	//std::cout << "Test for ostream overload FORM ->" << b << std::endl;
+	Form b("formulario", 42, 13);
+	std::cout << "Test for ostream overload FORM ->" << b << std::endl;
 
 	return (0);
 }

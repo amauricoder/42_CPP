@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:29:27 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 18:16:49 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:15:08 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,21 +34,28 @@ static int	test_shruberry_default_constructor(void);
 static int	test_shruberry_by_reference(void);
 static int	test_shruberry_copy_constructor(void);
 static int 	test_shruberry_target_constructor(void);
-static int	test_shruberry_file_creation(void);
+static int	test_shruberry_executeForm(void);
 
 //RobotomyRequestForm:
 static int	test_robotomy_default_constructor(void);
 static int	test_robotomy_by_reference(void);
 static int	test_robotomy_copy_constructor(void);
 static int	test_robotomy_target_constructor(void);
-static int	test_robotomy_doRobotomy(void);
+static int	test_robotomy_executeForm(void);
 
 //PresidentialPardonForm
 static int	test_presidential_default_constructor(void);
 static int	test_presidential_by_reference(void);
 static int	test_presidential_copy_constructor(void);
 static int	test_presidential_target_constructor(void);
-static int	test_presidential_doPardon(void);
+static int	test_presidential_executeForm(void);
+
+// Throw Exceptions
+static int 	test_bureaucrat_too_low_to_sign(void);
+static int	test_form_not_signed(void);
+static int	test_bureaucrat_executeForm_negative(void);
+static int	test_bureaucrat_executeForm_positive(void);
+
 //DEBUG
 static int	err_invalid_test(std::string test_name, int line);
 
@@ -63,7 +70,7 @@ int main(void)
 
 	if (test_shruberry_default_constructor() || test_shruberry_by_reference()
 		|| test_shruberry_copy_constructor() || test_shruberry_target_constructor()
-		|| test_shruberry_file_creation())
+		|| test_shruberry_executeForm())
 		return (EXIT_FAILURE);
 
 	std::cout << "*************************************" << std::endl;
@@ -72,7 +79,7 @@ int main(void)
 	
 	if (test_robotomy_default_constructor() || test_robotomy_by_reference()
 	|| test_robotomy_copy_constructor() || test_robotomy_target_constructor()
-	|| test_robotomy_doRobotomy())
+	|| test_robotomy_executeForm())
 		return (EXIT_FAILURE);
 
 	std::cout << "*************************************" << std::endl;
@@ -81,10 +88,16 @@ int main(void)
 
 	if (test_presidential_default_constructor() || test_presidential_by_reference()
 	|| test_presidential_copy_constructor() || test_presidential_target_constructor()
-	|| test_presidential_doPardon())
+	|| test_presidential_executeForm())
 		return (EXIT_FAILURE);
 	
+	std::cout << "*************************************" << std::endl;
+	std::cout << "*    TESTS THROW EXCEPTIONS         *" << std::endl;
+	std::cout << "*************************************" << std::endl;
 	
+	if (test_bureaucrat_too_low_to_sign() || test_form_not_signed()
+		|| test_bureaucrat_executeForm_negative() || test_bureaucrat_executeForm_positive())
+		return (EXIT_FAILURE);
 	return (0);
 }
 
@@ -148,12 +161,12 @@ int test_shruberry_target_constructor(void)
 }
 
 //Check if a file is correctly created with the specific name on it
-int	test_shruberry_file_creation(void)
+int	test_shruberry_executeForm(void)
 {
-	std::cout << BG_BLUE "5 test_shruberry_file_creation" RESET <<  std::endl;
+	std::cout << BG_BLUE "5 test_shruberry_executeForm" RESET <<  std::endl;
 	ShrubberyCreationForm a("test");
 	
-	a.createTreeFile();
+	a.formAction();
 	std::ifstream file("test_shrubbery");
 	
 	if (file.is_open())
@@ -165,8 +178,8 @@ int	test_shruberry_file_creation(void)
 		file.close();
 	}
 	else
-		return (err_invalid_test("test_shruberry_file_creation", __LINE__));
-	std::cout << BG_BLUE "5 test_shruberry_file_creation" RESET <<  std::endl;
+		return (err_invalid_test("test_shruberry_executeForm", __LINE__));
+	std::cout << BG_BLUE "5 test_shruberry_executeForm" RESET <<  std::endl;
 	return (EXIT_SUCCESS);
 }
 
@@ -229,21 +242,21 @@ int test_robotomy_target_constructor(void)
 }
 
 /* This test was made to compare the pairs 
-the return of doRobotomy (pair to robotomy ok and odd otherwise)
+the return of formAction (pair to robotomy ok and odd otherwise)
 with the r_exec (that is the turn)
 if their are not both pairs or both oods, the function is not working as expected
 (50% of roboromization)  */
-int	test_robotomy_doRobotomy(void)
+int	test_robotomy_executeForm(void)
 {
-	std::cout << BG_MAGENTA "10 test_robotomy_doRobotomy" RESET <<  std::endl;
+	std::cout << BG_MAGENTA "10 test_robotomy_executeForm" RESET <<  std::endl;
 	RobotomyRequestForm a("amauricoder");
 	
 	for (int r_exec = 1; r_exec <= 10; r_exec ++)
 	{
-		if (a.doRobotomy() % 2 != 0 && r_exec % 2 == 0)
-			return (err_invalid_test("test_robotomy_doRobotomy", __LINE__));
+		if (a.formAction() % 2 != 0 && r_exec % 2 == 0)
+			return (err_invalid_test("test_robotomy_executeForm", __LINE__));
 	}
-	std::cout << BG_MAGENTA "10 test_robotomy_doRobotomy" RESET <<  std::endl;
+	std::cout << BG_MAGENTA "10 test_robotomy_executeForm" RESET <<  std::endl;
 	return (EXIT_SUCCESS);
 }
 
@@ -301,17 +314,104 @@ int test_presidential_target_constructor(void)
 	if (a.getTarget() != "amauricoder" || a.getGradeExec() != PR_EXEC 
 	|| a.getGradeSign() != PR_SIGN || a.getName() != "PresidentialPardonForm")
 		return (err_invalid_test("test_presidential_target_constructor", __LINE__));
-	std::cout << BG_ORANGE "14 test_presidential_target_constructor" RESET <<  std::endl;
+	std::cout << BG_ORANGE "END 14 test_presidential_target_constructor" RESET <<  std::endl;
 	return (EXIT_SUCCESS);
 }
 
-int	test_presidential_doPardon(void)
+int	test_presidential_executeForm(void)
 {
-	std::cout << BG_BLUE "15 test_presidential_doPardon" RESET <<  std::endl;
+	std::cout << BG_BLUE "15 test_presidential_executeForm" RESET <<  std::endl;
 	PresidentialPardonForm a("amauricoder");
 
-	std::cout << BG_BLUE "15 test_presidential_doPardon" RESET <<  std::endl;
+	a.formAction();
+	std::cout << BG_BLUE "END 15 test_presidential_executeForm" RESET <<  std::endl;
 	return (EXIT_SUCCESS);
+}
+
+/****************************************************************/
+/*                       THROW EXCEPTIONS                       */
+/****************************************************************/
+
+//needs to catch exception
+int test_bureaucrat_too_low_to_sign(void)
+{
+	std::cout << BG_GREEN "16 test_bureaucrat_too_low_to_sign" RESET <<  std::endl;
+	Bureaucrat d("D");
+	Bureaucrat j("J");
+	j.setGrade(1);
+	AForm *f = new RobotomyRequestForm();
+	try
+	{
+		f->beSigned(j);
+		f->execute(d);
+	}
+	catch (const std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;	
+		std::cout << BG_GREEN "16 test_bureaucrat_too_low_to_sign" RESET <<  std::endl;
+		delete f;
+		return (EXIT_SUCCESS);
+	}
+	delete f;
+	return (err_invalid_test("END 16 test_bureaucrat_too_low_to_sign", __LINE__));
+}
+
+//needs to catch exception
+int	test_form_not_signed(void)
+{
+	std::cout << BG_MAGENTA "17 test_form_not_signed" RESET <<  std::endl;
+	Bureaucrat d("D");
+	AForm *f = new PresidentialPardonForm();
+	try
+	{
+		f->beSigned(d);	
+	}
+	catch(std::exception& e)
+	{
+		std::cerr << e.what() << std::endl;
+		std::cout << BG_MAGENTA "17 test_form_not_signed" RESET <<  std::endl;
+		delete f;
+		return (EXIT_SUCCESS);
+	}
+	delete f;
+	return (err_invalid_test("END 17 test_bureaucrat_too_low_to_sign", __LINE__));
+}
+
+//needs to catch exception
+int	test_bureaucrat_executeForm_negative(void)
+{
+	std::cout << BG_ORANGE "18 test_bureaucrat_executeForm_negative" RESET <<  std::endl;
+	Bureaucrat d("D");
+	AForm *f = new PresidentialPardonForm();
+
+	if (d.executeForm(*f) == 1)
+	{
+		delete f;
+		std::cout << BG_ORANGE "18 END test_bureaucrat_executeForm_negative" RESET <<  std::endl;
+		return (EXIT_SUCCESS);
+	}
+	delete f;
+	return (err_invalid_test("END 18 test_bureaucrat_executeForm_negative", __LINE__));
+}
+
+//needs to work
+int	test_bureaucrat_executeForm_positive(void)
+{
+	std::cout << BG_ORANGE "19 test_bureaucrat_executeForm_positive" RESET <<  std::endl;
+	Bureaucrat d("D");
+	d.setGrade(1);
+	AForm *f = new ShrubberyCreationForm();
+	
+	f->beSigned(d);
+	if (d.executeForm(*f) == 0)
+	{
+		delete f;
+		std::cout << BG_ORANGE "19 END test_bureaucrat_executeForm_positive" RESET <<  std::endl;
+		return (EXIT_SUCCESS);
+	}
+	delete f;
+	return (err_invalid_test("END 18 test_bureaucrat_executeForm_positive", __LINE__));
+	
 }
 
 /****************************************************************/

@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 16:17:16 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 17:55:54 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:56:51 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class RobotomyRequestForm : public AForm
 	//Getter
 		std::string getTarget(void);
 	//Required by the subject
-		int	doRobotomy(void);
+		int	formAction(void) const;
 };
 
 #endif

@@ -42,6 +42,7 @@ class AForm
 		int			getGradeExec(void) const;
 	//Required by the subject
 		void		beSigned(const Bureaucrat &b);
+		void		execute(Bureaucrat const & executor) const;
 	//exceptions
 		class GradeTooHighException : public std::exception
 		{
@@ -54,8 +55,23 @@ class AForm
 			public:
 				virtual const char* what() const throw();
 		};
+
+		class FormNotSignedException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+	
+		class NotEnoughGradeToExecException : public std::exception
+		{
+			public:
+				virtual const char* what() const throw();
+		};
+	
 	//Pure virtual not required by the suject, but I need it.
 		virtual	std::string getTarget(void) = 0;
+		virtual int			formAction(void) const = 0;
+	
 };
 
 //overload of the insertion («)

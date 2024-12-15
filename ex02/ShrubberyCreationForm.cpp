@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 14:38:27 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 18:03:59 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:57:13 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,7 +69,7 @@ std::string	ShrubberyCreationForm::getTarget()
 /************************************************/
 /*            REQUIRED BY THE SUBJECT           */
 /************************************************/
-void	ShrubberyCreationForm::createTreeFile()
+int	ShrubberyCreationForm::formAction() const
 {
 	std::string file_name = this->_target + "_shrubbery";
 	const char *file_name_ptr = file_name.c_str();
@@ -96,7 +96,8 @@ void	ShrubberyCreationForm::createTreeFile()
 	{
 		file << tree << std::endl;
 		file.close();
-		return ;
+		return (0);
 	}
 	std::cerr << "Error with file creation" << std::endl;
+	return (1);
 }

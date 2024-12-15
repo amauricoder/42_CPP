@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/14 20:19:19 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 14:34:29 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 20:12:30 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,6 +98,16 @@ void	AForm::beSigned(const Bureaucrat &b)
 		throw GradeTooLowException();		
 }
 
+void		AForm::execute(Bureaucrat const & executor) const
+{
+	if (!this->_is_signed)
+		throw FormNotSignedException();
+	if (executor.getGrade() > this->_grade_exec)
+		throw NotEnoughGradeToExecException();
+	this->formAction();
+	std::cout << this->_name << " was executed by " << executor.getName() << std::endl;
+}
+
 /**************************************/
 /*              EXCEPTIONS            */
 /**************************************/
@@ -110,6 +120,16 @@ const char* AForm::GradeTooHighException::what() const throw()
 const char* AForm::GradeTooLowException::what() const throw()
 {
 	return "AForm : Grade too low!";
+}
+
+const char* AForm::FormNotSignedException::what() const throw()
+{
+	return "AForm : Form not signed";
+}
+
+const char* AForm::NotEnoughGradeToExecException::what() const throw()
+{
+	return "Bureaucrat doesnt have enough grade to exec form";
 }
 
 /**************************************/

@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 14:38:29 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 17:55:37 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:56:48 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ class ShrubberyCreationForm : public AForm
 	//Getter
 		std::string	getTarget(void);
 	//Required by the subject
-		void	createTreeFile(void);
+		int	formAction(void) const;
 };
 
 #endif

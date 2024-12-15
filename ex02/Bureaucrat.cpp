@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:29:22 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 14:37:13 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:50:10 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -132,6 +132,21 @@ void			Bureaucrat::signForm(AForm &f)
     }
 	std::cout << this->_name << " signed " << f.getName() << std::endl;
 };
+
+int				Bureaucrat::executeForm(AForm const &form)
+{
+	try 
+	{
+		form.execute(*this);
+	}
+	catch (std::exception& e)
+	{
+		std::cerr << this->_name << " is not able to execute the form action" << std::endl;
+		return (1);
+	}
+	std::cout << this->_name << " executed form " << form.getName() << std::endl;
+	return (0);
+}
 
 /**************************************/
 /*              EXCEPTIONS            */

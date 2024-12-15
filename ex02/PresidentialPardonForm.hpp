@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:34:30 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 18:09:08 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:56:54 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@ class PresidentialPardonForm : public AForm
 	//Getter
 		std::string	getTarget(void);
 	//required by the subject
-		void	doPardon(void);
+		int	formAction(void) const;
 };
 
 #endif

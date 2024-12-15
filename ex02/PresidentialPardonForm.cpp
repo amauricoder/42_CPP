@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 17:34:28 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 18:10:56 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 19:57:18 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,9 +69,10 @@ std::string PresidentialPardonForm::getTarget(void)
 /****************************************/
 /*          REQUIRED BY THE SUBJECT     */
 /****************************************/
-void	PresidentialPardonForm::doPardon(void)
+int	PresidentialPardonForm::formAction(void) const
 {
 	std::cout << this->_target 
 		<< " has received presidential pardon by Zaphod Beeblebrox"
 	<< std::endl;
+	return (0);
 }
