@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 14:38:27 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 16:13:15 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:03:59 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,7 @@
 /************************************************/
 
 ShrubberyCreationForm::ShrubberyCreationForm()
-: 	AForm("ShrubberyCreationForm", 145, 137),
+: 	AForm("ShrubberyCreationForm", SH_SIGN, SH_EXEC),
 	_target("")
 {
 	//std::cout << "ShrubberyCreationForm Default Constructor" << std::endl;
@@ -51,7 +51,7 @@ ShrubberyCreationForm::~ShrubberyCreationForm()
 /************************************************/
 
 ShrubberyCreationForm::ShrubberyCreationForm(const std::string target)
-:	AForm("ShrubberyCreationForm", 145, 137),
+:	AForm("ShrubberyCreationForm", SH_SIGN, SH_EXEC),
 	_target(target)
 {
 	//std::cout << "ShrubberyCreationForm target constructor" << std::endl;

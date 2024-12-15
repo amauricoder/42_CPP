@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:29:27 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 17:31:55 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:16:49 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 #include "AForm.hpp"
 #include "ShrubberyCreationForm.hpp"
 #include "RobotomyRequestForm.hpp"
+#include "PresidentialPardonForm.hpp"
 
 #include <string>
 #include <sstream>
@@ -42,6 +43,12 @@ static int	test_robotomy_copy_constructor(void);
 static int	test_robotomy_target_constructor(void);
 static int	test_robotomy_doRobotomy(void);
 
+//PresidentialPardonForm
+static int	test_presidential_default_constructor(void);
+static int	test_presidential_by_reference(void);
+static int	test_presidential_copy_constructor(void);
+static int	test_presidential_target_constructor(void);
+static int	test_presidential_doPardon(void);
 //DEBUG
 static int	err_invalid_test(std::string test_name, int line);
 
@@ -67,6 +74,17 @@ int main(void)
 	|| test_robotomy_copy_constructor() || test_robotomy_target_constructor()
 	|| test_robotomy_doRobotomy())
 		return (EXIT_FAILURE);
+
+	std::cout << "*************************************" << std::endl;
+	std::cout << "*    TESTS PresidentialPardonForm    *" << std::endl;
+	std::cout << "*************************************" << std::endl;
+
+	if (test_presidential_default_constructor() || test_presidential_by_reference()
+	|| test_presidential_copy_constructor() || test_presidential_target_constructor()
+	|| test_presidential_doPardon())
+		return (EXIT_FAILURE);
+	
+	
 	return (0);
 }
 
@@ -200,13 +218,13 @@ int	test_robotomy_copy_constructor(void)
 
 int test_robotomy_target_constructor(void)
 {
-	std::cout << BG_ORANGE "9 test_robotomy_target_constructor" RESET <<  std::endl;
+	std::cout << BG_BLUE "9 test_robotomy_target_constructor" RESET <<  std::endl;
 	RobotomyRequestForm a("amauricoder");
 
 	if (a.getTarget() != "amauricoder" || a.getGradeExec() != 45 
 	|| a.getGradeSign() != 72 || a.getName() != "RobotomyRequestForm")
 		return (err_invalid_test("test_shruberry_target_constructor", __LINE__));
-	std::cout << BG_ORANGE "9 test_robotomy_target_constructor" RESET <<  std::endl;
+	std::cout << BG_BLUE "9 test_robotomy_target_constructor" RESET <<  std::endl;
 	return (EXIT_SUCCESS);
 }
 
@@ -217,7 +235,7 @@ if their are not both pairs or both oods, the function is not working as expecte
 (50% of roboromization)  */
 int	test_robotomy_doRobotomy(void)
 {
-	std::cout << BG_ORANGE "10 test_robotomy_doRobotomy" RESET <<  std::endl;
+	std::cout << BG_MAGENTA "10 test_robotomy_doRobotomy" RESET <<  std::endl;
 	RobotomyRequestForm a("amauricoder");
 	
 	for (int r_exec = 1; r_exec <= 10; r_exec ++)
@@ -225,7 +243,74 @@ int	test_robotomy_doRobotomy(void)
 		if (a.doRobotomy() % 2 != 0 && r_exec % 2 == 0)
 			return (err_invalid_test("test_robotomy_doRobotomy", __LINE__));
 	}
-	std::cout << BG_ORANGE "10 test_robotomy_doRobotomy" RESET <<  std::endl;
+	std::cout << BG_MAGENTA "10 test_robotomy_doRobotomy" RESET <<  std::endl;
+	return (EXIT_SUCCESS);
+}
+
+/****************************************************************/
+/*                     PresidentialPardonForm:                  */
+/****************************************************************/
+
+int test_presidential_default_constructor(void)
+{
+	std::cout << BG_BLUE "11 test_presidential_default_constructor" RESET <<  std::endl;
+	PresidentialPardonForm a;
+	
+	if (a.getGradeExec() != PR_EXEC || a.getGradeSign() != PR_SIGN
+		|| a.getName() != "PresidentialPardonForm" || a.getTarget() != "")
+		return (err_invalid_test("test_presidential_default_constructor", __LINE__));
+	std::cout << BG_BLUE "END 11 test_presidential_default_constructor" RESET << std::endl;
+	return (EXIT_SUCCESS);
+}
+
+int	test_presidential_by_reference(void)
+{
+	std::cout << BG_GREEN "12 test_presidential_by_reference" RESET <<  std::endl;
+
+	AForm *ptr = new PresidentialPardonForm();
+	
+	if (ptr->getGradeExec() != PR_EXEC || ptr->getGradeSign() != PR_SIGN
+		|| ptr->getName() != "PresidentialPardonForm" || ptr->getTarget() != "")
+	{
+		delete ptr;
+		return (err_invalid_test("test_presidential_by_reference", __LINE__));
+	}
+	std::cout << BG_GREEN "END 12 test_presidential_by_reference" RESET <<  std::endl;
+	delete ptr;
+	return (EXIT_SUCCESS);
+}
+
+int	test_presidential_copy_constructor(void)
+{
+	std::cout << BG_MAGENTA "13 test_presidential_copy_constructor" RESET <<  std::endl;
+	PresidentialPardonForm a;
+	PresidentialPardonForm b(a);
+
+	if (b.getGradeExec() != a.getGradeExec() || b.getGradeSign() != a.getGradeSign()
+		|| b.getName() != a.getName() || b.getTarget() != a.getTarget())
+		return (err_invalid_test("test_presidential_copy_constructor", __LINE__));
+	std::cout << BG_MAGENTA "END 13 test_presidential_copy_constructor" RESET <<  std::endl;
+	return (EXIT_SUCCESS);
+}
+
+int test_presidential_target_constructor(void)
+{
+	std::cout << BG_ORANGE "14 test_presidential_target_constructor" RESET <<  std::endl;
+	PresidentialPardonForm a("amauricoder");
+
+	if (a.getTarget() != "amauricoder" || a.getGradeExec() != PR_EXEC 
+	|| a.getGradeSign() != PR_SIGN || a.getName() != "PresidentialPardonForm")
+		return (err_invalid_test("test_presidential_target_constructor", __LINE__));
+	std::cout << BG_ORANGE "14 test_presidential_target_constructor" RESET <<  std::endl;
+	return (EXIT_SUCCESS);
+}
+
+int	test_presidential_doPardon(void)
+{
+	std::cout << BG_BLUE "15 test_presidential_doPardon" RESET <<  std::endl;
+	PresidentialPardonForm a("amauricoder");
+
+	std::cout << BG_BLUE "15 test_presidential_doPardon" RESET <<  std::endl;
 	return (EXIT_SUCCESS);
 }
 

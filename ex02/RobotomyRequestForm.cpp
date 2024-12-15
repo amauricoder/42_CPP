@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/15 16:17:14 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/15 17:25:48 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/15 18:04:27 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*                 ORTHODOX                */
 /*******************************************/
 RobotomyRequestForm::RobotomyRequestForm()
-: 	AForm("RobotomyRequestForm", 72, 45),
+: 	AForm("RobotomyRequestForm", RB_SIGN, RB_EXEC),
 	_target("")
 {
 	//std::cout << "RobotomyRequestForm Default Constructor" << std::endl;
@@ -51,7 +51,7 @@ RobotomyRequestForm::~RobotomyRequestForm()
 /*******************************************/
 
 RobotomyRequestForm::RobotomyRequestForm(std::string target)
-: 	AForm("RobotomyRequestForm", 72, 45),
+: 	AForm("RobotomyRequestForm", RB_SIGN, RB_EXEC),
 	_target(target)
 {
 	//std::cout << "RobotomyRequestForm target Constructor" << std::endl;
