@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:10:32 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/17 19:18:19 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/18 14:19:24 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 #include <cmath> //for std::isnan, std::isinf
 #include <cctype> //to std::isalpha() and etc
 #include <iomanip> // For setprecision
-
+#include <cstdlib> //strtoold
 enum 
 {
 	TYPE_CHAR = 0,

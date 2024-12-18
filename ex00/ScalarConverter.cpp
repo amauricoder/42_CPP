@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:10:34 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/17 19:18:49 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/18 15:22:58 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,10 +52,7 @@ int ScalarConverter::convert(const std::string &literal)
 	switch (input_type)
 	{
 		case TYPE_CHAR:
-			print_values(literal, 
-							static_cast<int>(literal[0]), 
-							static_cast<float>(literal[0]), 
-							static_cast<double>(literal[0]));
+			print_values(literal, 1);
 			break;
 		case TYPE_NAN:
 			print_special("nan");
