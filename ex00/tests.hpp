@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:03:26 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/17 17:39:36 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:51:03 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,11 +30,15 @@
 
 int	test_instantiate_ScalarConverter(void);
 int	test_ScalarConverter_char_type_alphabet(void);
-int	test_ScalarConverter_char_not_printable(void);
-int	test_ScalarConverter_char_not_letter(void);
+int	test_ScalarConverter_char_not_printable_ASCII(void);
+int	test_ScalarConverter_ASCII_symbols(void);
 int test_ScalarConverter_nan(void);
 int	test_inf_positive(void);
 int	test_inf_negative(void);
+int	test_ScalarConverter_only_space(void);
+int	test_ScalarConverter_int(void);
+int test_ScalarConverter_0_to_10_int(void);
+int	test_ScalarConverter_0_to_150_int(void);
 
 int	err_invalid_test(std::string test_name, int line, const char* file);
 int	err_msg(std::string msg, int status, int line, const char* file);

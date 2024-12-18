@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:03:24 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/17 18:15:05 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/18 19:58:06 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,32 +44,33 @@ int	test_ScalarConverter_char_type_alphabet(void)
 }
 
 //Needs to print non displayable to char
-int	test_ScalarConverter_char_not_printable(void)
+int	test_ScalarConverter_char_not_printable_ASCII(void)
 {
-	std::cout << BG_MAGENTA "3 test_ScalarConverter_char_not_printable" RESET << std::endl;
+	std::cout << BG_MAGENTA "3 test_ScalarConverter_char_not_printable_ASCII" RESET << std::endl;
 	for (int i = 0; i < 32; i ++)
 	{	
 		std::cout << BG_MAGENTA << "START TEST LOOP" RESET << std::endl;
 		char letter = i;
 		std::string letter_str(1, letter);
+		std::cout << BG_ORANGE "Value(char) : " << i << RESET << std::endl;
 		if (ScalarConverter::convert(letter_str) != TYPE_CHAR)
 			return (err_invalid_test("test_ScalarConverter_char_type_alphabet TEST FAIL", __LINE__, __FILE__));
 		std::cout << BG_MAGENTA << "END TEST LOOP" RESET << std::endl;
 	}
-	std::cout << BG_MAGENTA "3 test_ScalarConverter_char_not_printable TEST OK" RESET << std::endl;
+	std::cout << BG_MAGENTA "3 test_ScalarConverter_char_not_printable_ASCII TEST OK" RESET << std::endl;
 	return (EXIT_SUCCESS);
 }
 
-int	test_ScalarConverter_char_not_letter(void)
+int	test_ScalarConverter_ASCII_symbols(void)
 {
-	std::cout << BG_ORANGE "4 test_ScalarConverter_char_not_letter" RESET << std::endl;
+	std::cout << BG_ORANGE "4 test_ScalarConverter_ASCII_symbols" RESET << std::endl;
 	for (int i = 33; i < 48; i ++)
 	{	
 		std::cout << BG_ORANGE << "START TEST LOOP" RESET << std::endl;
 		char letter = i;
 		std::string letter_str(1, letter);
 		if (ScalarConverter::convert(letter_str) != TYPE_CHAR)
-			return (err_invalid_test("test_ScalarConverter_char_not_letter TEST FAIL", __LINE__, __FILE__));
+			return (err_invalid_test("test_ScalarConverter_ASCII_symbols TEST FAIL", __LINE__, __FILE__));
 		std::cout << BG_ORANGE << "END TEST LOOP" RESET << std::endl;
 	}
 	for (int i = 58; i < 64; i ++)
@@ -78,10 +79,10 @@ int	test_ScalarConverter_char_not_letter(void)
 		char letter = i;
 		std::string letter_str(1, letter);
 		if (ScalarConverter::convert(letter_str) != TYPE_CHAR)
-			return (err_invalid_test("test_ScalarConverter_char_not_letter TEST FAIL", __LINE__, __FILE__));
+			return (err_invalid_test("test_ScalarConverter_ASCII_symbols TEST FAIL", __LINE__, __FILE__));
 		std::cout << BG_ORANGE << "END TEST LOOP" RESET << std::endl;
 	}
-	std::cout << BG_ORANGE "4 test_ScalarConverter_char_not_letter TEST OK" RESET << std::endl;
+	std::cout << BG_ORANGE "4 test_ScalarConverter_ASCII_symbols TEST OK" RESET << std::endl;
 	return (EXIT_SUCCESS);
 }
 
@@ -118,8 +119,60 @@ int	test_inf_negative(void)
 	return (EXIT_SUCCESS);
 }
 
+int	test_ScalarConverter_only_space(void)
+{
+	std::cout << BG_ORANGE << "8 test_ScalarConverter_only_space " RESET << std::endl;
+	
+	if (ScalarConverter::convert(" ") != TYPE_CHAR)
+			return (err_invalid_test("test_ScalarConverter_only_space TEST FAIL", __LINE__, __FILE__));
+	std::cout << BG_ORANGE "8 test_ScalarConverter_only_space TEST OK" RESET << std::endl;
+	return (EXIT_SUCCESS);
+}
 
+int	test_ScalarConverter_int(void)
+{
+	std::cout << BG_BLUE << "9 test_ScalarConverter_int " RESET << std::endl;
+	if (ScalarConverter::convert("42") != TYPE_INT 
+		|| ScalarConverter::convert("-42") != TYPE_INT
+		|| ScalarConverter::convert("2147483648") != TYPE_INT  
+		|| ScalarConverter::convert("-2147483649") != TYPE_INT)
+	{
+			return (err_invalid_test("test_ScalarConverter_int TEST FAIL", __LINE__, __FILE__));
+	}
+	std::cout << BG_BLUE << "9 test_ScalarConverter_int TEST" RESET << std::endl;
+	return (EXIT_SUCCESS);
+}
 
+int test_ScalarConverter_0_to_10_int(void)
+{
+	std::cout << BG_GREEN << "10 test_ScalarConverter_0_to_10_int " RESET << std::endl;
+	for (int i = 0; i <= 10; i++)
+	{
+		std::cout << "****LOOP test_ScalarConverter_0_to_10_int****" << std::endl;
+		std::ostringstream oss;
+		oss << i;
+		if (ScalarConverter::convert(oss.str()) != TYPE_INT)
+			return (err_invalid_test("test_ScalarConverter_0_to_10_int TEST FAIL", __LINE__, __FILE__));
+	}
+	std::cout << BG_GREEN << "10 test_ScalarConverter_0_to_10_int " RESET << std::endl;
+	return (EXIT_SUCCESS);
+}
+
+int	test_ScalarConverter_0_to_150_int(void)
+{
+	std::cout << BG_MAGENTA << "11 test_ScalarConverter_0_to_150_int " RESET << std::endl;
+	for (int i = 0; i <= 150; i++)
+	{
+		std::cout << "****LOOP test_ScalarConverter_0_to_150_int****" << std::endl;
+		std::cout << BG_ORANGE "Value(int) : " << i << RESET << std::endl;
+		std::ostringstream oss;
+		oss << i;
+		if (ScalarConverter::convert(oss.str()) != TYPE_INT)
+			return (err_invalid_test("test_ScalarConverter_0_to_150_int TEST FAIL", __LINE__, __FILE__));
+	}
+	std::cout << BG_MAGENTA << "11 test_ScalarConverter_0_to_150_int " RESET << std::endl;
+	return (EXIT_SUCCESS);
+}
 /***********************************************/
 /*               DEBUG/ERROR MESSAGE           */
 /***********************************************/

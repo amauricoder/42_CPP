@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/17 13:25:07 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/18 15:40:51 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/18 16:14:58 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,6 @@ void	print_char(std::string literal);
 void	print_int(std::string literal, bool is_char);
 void	print_float(std::string literal, bool is_char);
 void	print_double(std::string literal, bool is_char);
-int		print_special(std::string type);
+int		print_special(int type);
 
 #endif

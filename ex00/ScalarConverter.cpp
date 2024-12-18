@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/16 17:10:34 by aconceic          #+#    #+#             */
-/*   Updated: 2024/12/18 15:22:58 by aconceic         ###   ########.fr       */
+/*   Updated: 2024/12/18 17:10:07 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,24 +47,17 @@ ScalarConverter::~ScalarConverter()
 
 int ScalarConverter::convert(const std::string &literal)
 {
-	//Preciso verificar se eh um input valido
 	int input_type = get_input_type(literal);
-	switch (input_type)
+	if (input_type == TYPE_INVALID)
 	{
-		case TYPE_CHAR:
-			print_values(literal, 1);
-			break;
-		case TYPE_NAN:
-			print_special("nan");
-			break;
-		case TYPE_P_INF:
-			print_special("+inf");
-			break;
-		case TYPE_N_INF:
-			print_special("-inf");
-			break;
-		default:
-			break;
+		std::cout << "Invalid input" << std::endl;
+		return (EXIT_FAILURE);
 	}
+	if (input_type >= TYPE_N_INF && input_type <= TYPE_NAN)
+		print_special(input_type);
+	else if (input_type == TYPE_CHAR)
+		print_values(literal, 1);
+	else
+		print_values(literal, 0);
 	return (input_type);
 }
