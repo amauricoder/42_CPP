@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/11 14:30:20 by aconceic          #+#    #+#             */
-/*   Updated: 2025/01/11 15:07:57 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/01/12 11:58:22 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,6 @@ Serializer::~Serializer()
 
 uintptr_t Serializer::serialize(Data* ptr)
 {
-	
 	return (reinterpret_cast<uintptr_t>(ptr));
 }
 
