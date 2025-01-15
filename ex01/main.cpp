@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:29:27 by aconceic          #+#    #+#             */
-/*   Updated: 2025/01/12 12:50:14 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:33:18 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 #include "Serializer.hpp"
 
 //new concept - reinterpret_cast<type>(to_be_casted)
+//not so secure, reinterpret the bits to the desired type
 int main(void)
 {
 	if (test_compare_data_address() || test_compare_content()

@@ -3,17 +3,18 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/12/09 19:29:27 by aconceic          #+#    #+#             */
-/*   Updated: 2025/01/12 12:54:34 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/01/15 16:26:48 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-//static int	err_invalid_test(std::string test_name, int line);
 #include "tests.hpp"
 #include "ScalarConverter.hpp"
 
+//static_cast<type>(var)
+//used on compilation time, to more secure convertions
 int main(int argc, char **argv)
 {
 	(void)argv;
