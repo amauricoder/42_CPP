@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/22 14:28:16 by aconceic          #+#    #+#             */
-/*   Updated: 2025/01/22 20:19:35 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/01/23 13:03:14 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,16 +30,10 @@ Array<T>::Array(const Array<T> &src)
 	if (this == &src)
 		return ;
 
-	if (this->_arr)
-		delete[] this->_arr;
-
-	int j = 0;
-	while (src._arr[j])
-	{
-		this->arr[j] = new T;
-		_arr[j] = src._arr[j];
-		j ++;
-	}
+	this->_arr_size = src._arr_size;
+	this->_arr = new T[this->_arr_size];
+	for (unsigned int i = 0; i < _arr_size; i++)
+        _arr[i] = src._arr[i];
 }
 
 template <class T>
@@ -50,13 +44,10 @@ Array<T>& Array<T>::operator=(const Array<T> &src)
 	{
 		if (this->_arr)
 			delete[] this->_arr;
-		int j = 0;
-		while (src._arr[j])
-		{
-			this->arr[j] = new T;
-			_arr[j] = src._arr[j];
-			j ++;
-		}
+		this->_arr_size = src._arr_size;
+		this->_arr = new T[this->_arr_size];
+		for (unsigned int i = 0; i < _arr_size; ++i)
+    	    _arr[i] = src._arr[i];
 	}
 	return (*this);
 }
@@ -72,13 +63,13 @@ Array<T>::~Array()
 /******************************************/
 
 template <class T>
-Array<T>::Array(unsigned int n) : _arr(new T[n]), _arr_size(n)
+Array<T>::Array(unsigned int n) : _arr(new T[n]()), _arr_size(n)
 {
-	std::cout << "unsigned int constructor" << std::endl;
+	//std::cout << "unsigned int constructor" << std::endl;
 }
 
 template <class T>
-T&	Array<T>::operator[](unsigned int index)
+T&	Array<T>::operator[](unsigned int index) const
 {
 	if (this->_arr_size == 0)
 		throw EmptyArray();
