@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:51:43 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/03 11:01:30 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/03 13:24:35 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,6 +51,18 @@ Span::Span(unsigned int N) : _maxqt(N)
 {
 	//std::cout << "Span U_Int Constructor" << std::endl;
 }
+/********************************/
+/*            GETTER            */
+/********************************/
+const std::vector<int>& 	Span::getData(void) const
+{
+	return (this->_data);
+};
+
+const unsigned int& Span::getMaxQt(void) const
+{
+	return (this->_maxqt);
+};
 
 /********************************/
 /*      MEMBER FUNCTIONS        */
@@ -67,7 +79,7 @@ void	Span::addNumber(int nbr)
 int		Span::shortestSpan(void)
 {
 	if (this->_data.size() < 2)
-		throw NoSpanFound();
+		throw NoRangeFound();
 	std::vector<int> sorted = this->_data;
 	std::sort(sorted.begin(), sorted.end());
 	int	minSpan = std::numeric_limits<int>::max();
@@ -79,17 +91,38 @@ int		Span::shortestSpan(void)
 int		Span::longestSpan(void)
 {
 	if (this->_data.size() < 2)
-		throw NoSpanFound();
+		throw NoRangeFound();
 	int maxVal = *std::max_element(this->_data.begin(), this->_data.end());
 	int	minVal = *std::min_element(this->_data.begin(), this->_data.end());
 	return (maxVal - minVal);
 }
 
-void	Span::addRange(std::vector<int>::iterator start, std::vector<int>::iterator end)
+/********************************/
+/*         		DEBUG           */
+/********************************/
+std::string	Span::ossSpan(void)
 {
-	if (_data.size() + std::distance(start, end) > this->_maxqt)
-		throw MaxElementsStored();
-	_data.insert(this->_data.end(), start, end);
+	std::ostringstream oss;
+
+	for (std::vector<int>::iterator it = this->_data.begin(); it != this->_data.end(); it ++)
+	{
+		oss << (*it);
+	}
+	
+	/* for (std::vector<int>::iterator it = this->_data.begin(); it != this->_data.end(); it ++)
+	{
+		std::cout << "Number: " << (*it) << std::endl;
+	} */
+	
+	return (oss.str());
+}
+
+void	Span::printSpan(void)
+{
+	for (std::vector<int>::iterator it = this->_data.begin(); it != this->_data.end(); it ++)
+	{
+		std::cout << "Number: " << (*it) << std::endl;
+	}
 }
 
 /********************************/
@@ -101,7 +134,7 @@ const char * Span::MaxElementsStored::what(void) const throw()
 	return ("Max Elements Stored!");
 }
 
-const char * Span::NoSpanFound::what(void) const throw()
+const char * Span::NoRangeFound::what(void) const throw()
 {
-	return ("No Span found!");
+	return ("No range found!");
 }

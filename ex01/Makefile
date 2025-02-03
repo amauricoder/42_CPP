@@ -6,14 +6,14 @@
 #    By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 19:54:51 by aconceic          #+#    #+#              #
-#    Updated: 2025/01/28 16:51:32 by aconceic         ###   ########.fr        #
+#    Updated: 2025/02/03 11:38:08 by aconceic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
 CFLAGS = -g -Wall -Wextra -Werror -std=c++98
 
-NAME = ex00
+NAME = ex01
 SRC = main.cpp Span.cpp \
 
 OBJ_DIR = ./objs/
