@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:51:45 by aconceic          #+#    #+#             */
-/*   Updated: 2025/01/29 22:22:59 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/03 10:43:24 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ class Span
 	private:
 		//garantee instantiation only with unsigned int
 		Span();
-		unsigned int		_N;
+		unsigned int		_maxqt;
 		std::vector<int>	_data;
 	public:
 		//Orthodox
@@ -44,6 +44,7 @@ class Span
 		void	addNumber(int nbr);
 		int		shortestSpan(void);
 		int		longestSpan(void);
+		void	addRange(std::vector<int>::iterator start, std::vector<int>::iterator end);
 		//exceptions
 		class MaxElementsStored : public std::exception
 		{
@@ -60,7 +61,7 @@ class Span
 		template <typename T>
 		void	addNumber(T start, T end)
 		{
-			if (std::distance(start, end) + this->_data.size() > this->_N)
+			if (std::distance(start, end) + this->_data.size() > this->_maxqt)
 				throw MaxElementsStored();
 			this->_data.insert(this->_data.end(), start, end);
 		}

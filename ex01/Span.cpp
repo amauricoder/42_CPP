@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:51:43 by aconceic          #+#    #+#             */
-/*   Updated: 2025/01/29 22:23:20 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/03 11:01:30 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ Span::Span()
 	//std::cout << "Span Constructor" << std::endl;
 }
 
-Span::Span(const Span &src) : _N(src._N), _data(src._data)
+Span::Span(const Span &src) : _maxqt(src._maxqt), _data(src._data)
 {
 	//std::cout << "Span Copy Constructor" << std::endl;
 }
@@ -30,7 +30,7 @@ Span& Span::operator=(const Span &src)
 	//std::cout << "Span Assignment Operator" << std::endl;
 	if (this != &src)
 	{
-		this->_N = src._N;
+		this->_maxqt = src._maxqt;
 		this->_data.clear();
 		this->_data.insert(this->_data.end(), 
 			src._data.begin(), src._data.end());
@@ -47,7 +47,7 @@ Span::~Span()
 /*       OTHER CONSTRUCTOR      */
 /********************************/
 
-Span::Span(unsigned int N) : _N(N)
+Span::Span(unsigned int N) : _maxqt(N)
 {
 	//std::cout << "Span U_Int Constructor" << std::endl;
 }
@@ -59,7 +59,7 @@ Span::Span(unsigned int N) : _N(N)
 void	Span::addNumber(int nbr)
 {
 	//std::cout << "addNumber Member Function" << std::endl;
-	if (this->_N == _data.size())
+	if (this->_maxqt == _data.size())
 		throw MaxElementsStored();
 	_data.push_back(nbr);
 }
@@ -83,6 +83,13 @@ int		Span::longestSpan(void)
 	int maxVal = *std::max_element(this->_data.begin(), this->_data.end());
 	int	minVal = *std::min_element(this->_data.begin(), this->_data.end());
 	return (maxVal - minVal);
+}
+
+void	Span::addRange(std::vector<int>::iterator start, std::vector<int>::iterator end)
+{
+	if (_data.size() + std::distance(start, end) > this->_maxqt)
+		throw MaxElementsStored();
+	_data.insert(this->_data.end(), start, end);
 }
 
 /********************************/
