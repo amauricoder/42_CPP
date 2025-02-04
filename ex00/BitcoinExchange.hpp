@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:24:03 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/04 15:05:27 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/04 15:22:11 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,6 +29,11 @@
 #include <fstream> //std::ofstream
 #include <iostream>
 #include <algorithm>
+
+class BitcoinExchange
+{
+		
+};
 
 /********************* FUNCTIONS *********************/
 bool is_argument_valid(int argc, char **argv);
