@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:24:03 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/04 15:22:11 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/05 11:29:32 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,17 +29,15 @@
 #include <fstream> //std::ofstream
 #include <iostream>
 #include <algorithm>
-
-class BitcoinExchange
-{
-		
-};
+#include <map>
 
 /********************* FUNCTIONS *********************/
 bool is_argument_valid(int argc, char **argv);
-
+std::map<std::string, double> get_database(void);
+void	process_input(std::string path, std::map<std::string, double> btc_data);
 /********************* DEBUG *********************/
-int	err_invalid_test(std::string test_name, int line, const char* file);
-int	success_msg(std::string name);
-int	failure_msg(std::string msg);
+void	print_map(const std::map<std::string, double> &to_print);
+int		err_invalid_test(std::string test_name, int line, const char* file);
+int		success_msg(std::string name);
+int		failure_msg(std::string msg, int ret_value);
 #endif
