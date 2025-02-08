@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   BitcoinExchange.hpp                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:24:03 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/05 11:29:32 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/08 16:50:57 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,15 +28,23 @@
 #include <sstream>
 #include <fstream> //std::ofstream
 #include <iostream>
-#include <algorithm>
+#include <algorithm> //lower_bound()
+#include <cctype> //std::isdigit()
+#include <climits> //limits
+#include <string>
 #include <map>
 
+
 /********************* FUNCTIONS *********************/
-bool is_argument_valid(int argc, char **argv);
-std::map<std::string, double> get_database(void);
-void	process_input(std::string path, std::map<std::string, double> btc_data);
+bool							is_argument_valid(int argc, char **argv);
+std::map<std::string, double> 	get_database(void);
+void							process_input(std::string path, std::map<std::string, double> btc_data);
+std::string 					trim_date(std::string date);
+bool							is_dateformat_valid(std::string date);
+bool							is_date_valid(std::string date);
+int								print_values(std::string erro_msg, std::string date, double qt, std::map<std::string, double>btc_data);
+void 							define_quantity_valicity(std::string &error_msg, std::istringstream &ss, double qt);
 /********************* DEBUG *********************/
-void	print_map(const std::map<std::string, double> &to_print);
 int		err_invalid_test(std::string test_name, int line, const char* file);
 int		success_msg(std::string name);
 int		failure_msg(std::string msg, int ret_value);
