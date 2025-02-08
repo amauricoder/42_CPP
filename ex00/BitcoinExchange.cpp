@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:24:01 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/08 17:13:56 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/08 17:17:27 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@
 
 //Check if the argument is valid. Boolean. return true(1) || false(0).
 //https://stackoverflow.com/questions/7880/how-do-you-open-a-file-in-c
+//https://cplusplus.com/reference/istream/istream/peek/
 bool is_argument_valid(int argc, char **argv)
 {
 	if (argc != 2 || !argv[1])
