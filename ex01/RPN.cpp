@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 09:12:10 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/10 17:37:32 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/10 17:52:41 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,9 +20,13 @@
 
 bool	is_argument_valid(int argc, char **argv)
 {
-	if (argc != 2)
+	if (argc != 2 || !argv[1])
 		return (failure_msg("Error!\nInvalid Argument.", false));
 
+	std::string arg = argv[1];
+	if (arg.empty() || arg.find_first_not_of(" \t\n\r\f\v") == std::string::npos)
+		return (failure_msg("Error!\nEmpty Argument.", false));
+		
 	std::string valid_chars = " +-/*";
 	for (int i = 0; argv[1][i] != '\0'; i++) {
 		if (std::isdigit(argv[1][i]) && std::isdigit(argv[1][i + 1]) && argv[1][i] != '0')
@@ -30,7 +34,6 @@ bool	is_argument_valid(int argc, char **argv)
 		if (!(std::isdigit(argv[1][i]) || valid_chars.find(argv[1][i]) != std::string::npos))
 			return failure_msg("Error!\nInvalid Argument.", false);
 	}
-
 	return (true);
 }
 
