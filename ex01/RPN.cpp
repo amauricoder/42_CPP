@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 09:12:10 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/10 17:52:41 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/10 18:48:21 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,9 +30,9 @@ bool	is_argument_valid(int argc, char **argv)
 	std::string valid_chars = " +-/*";
 	for (int i = 0; argv[1][i] != '\0'; i++) {
 		if (std::isdigit(argv[1][i]) && std::isdigit(argv[1][i + 1]) && argv[1][i] != '0')
-			return failure_msg("Error!\nInvalid Argument.", false);
+			return failure_msg("Error!\n0 to 9 numbers only.", false);
 		if (!(std::isdigit(argv[1][i]) || valid_chars.find(argv[1][i]) != std::string::npos))
-			return failure_msg("Error!\nInvalid Argument.", false);
+			return failure_msg("Error!\nInvalid Character.", false);
 	}
 	return (true);
 }
@@ -43,9 +43,10 @@ int do_rpn(std::string expr)
 {
 	std::stack<int> s;
 	int				expr_nbr;
+	int				i = 0;
 	std::string operators = "+-/*";
 
-	for (int i = 0; expr[i] != '\0'; i ++)
+	while (expr[i])
 	{
 		if (std::isdigit(expr[i]))
 		{
@@ -58,8 +59,9 @@ int do_rpn(std::string expr)
 				return (failure_msg("Error!\nInvalid Expression.", EXIT_FAILURE));
 			do_operation(expr[i], s);
 		}
+		i ++;
 	}
-	if (s.size() > 1)
+	if (s.size() > 1 || i == 1)
 				return (failure_msg("Error!\nInvalid Expression.", EXIT_FAILURE));
 	print_stack(s);
 	return (EXIT_SUCCESS);
@@ -111,12 +113,6 @@ void	print_stack(std::stack<int> s)
 		s.pop();	
 	}
 	std::cout << std::endl;
-}
-
-int	success_msg(std::string name)
-{
-	std::cout << BG_GREEN << name << " SUCESS!" RESET << std::endl;
-	return (EXIT_SUCCESS);
 }
 
 int	failure_msg(std::string msg, int ret_value)
