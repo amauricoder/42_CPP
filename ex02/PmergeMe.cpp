@@ -6,11 +6,53 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:37:55 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/11 16:33:47 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/11 19:34:34 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
+
+/**********************************************/
+/*          ORTHODOX and CONSTRUCTORS         */
+/**********************************************/
+PmergeMe::PmergeMe()
+{}
+
+PmergeMe::PmergeMe(PmergeMe const &src)
+{
+	*this = src;
+}
+
+PmergeMe& PmergeMe::operator=(PmergeMe const &src)
+{
+	if (this != &src)
+	{
+		this->_v_values = src._v_values;
+		this->_d_values = src._d_values;
+	}
+	return (*this);
+}
+
+PmergeMe::~PmergeMe()
+{}
+
+
+PmergeMe::PmergeMe(std::vector<std::string> input)
+{
+	std::vector<std::string>::iterator it = input.begin();
+	int	convertion = 0;
+	while (it != input.end())
+	{
+		convertion = std::atoi(it->substr(0).c_str());
+		this->_v_values.push_back(convertion);
+		this->_d_values.push_back(convertion);
+		it ++;
+	}
+	print_container(input, "Before: ");
+	print_container(this->_v_values, "VECTOR: ");
+	print_container(this->_d_values, "DEQUE: ");
+	
+}
 
 /**********************************************/
 /*                 FUNCTIONS                  */
