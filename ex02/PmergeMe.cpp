@@ -3,15 +3,16 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:37:55 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/13 16:46:07 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/18 18:43:04 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
 
+int PmergeMe::nbr_comparations = 0;
 /**********************************************/
 /*          ORTHODOX and CONSTRUCTORS         */
 /**********************************************/
@@ -105,46 +106,66 @@ void	PmergeMe::VectorOrdenate()
 	print_pairs(this->_v_pairs, "(VectorOrdenate)PAIRS VECTOR SORTED:"); */
 	//print_pairs(this->_v_pairs, "(VectorOrdenate)2PAIRS VECTOR SORTED:");
 	
-	StartVectorOrdenate(1);
+	DoPairsOrdenation(1);
+	PrintContainer(this->_v_values, "DoPairsOrdenation: ");
 	this->_end_v_time = clock();
 }
 
-void	PmergeMe::StartVectorOrdenate(int pair_lvl)
+void	PmergeMe::DoPairsOrdenation(int pair_lvl)
 {
-	
+	//Count numbers of pairs. If there are no pairs, stop recurtion.
 	int	pair_qt = this->_v_values.size() / pair_lvl;
 	if (pair_qt < 2)
 		return ;
 	
-	std::vector<int> max;
-	std::vector<int> min;
+	bool is_odd = pair_qt % 2 == 1;
+
+	//determina o inicio e fim da iteracao
+	std::vector<int>::iterator start = this->_v_values.begin();
+	std::vector<int>::iterator last = next(this->_v_values.begin(), pair_lvl * (pair_qt));
+	std::vector<int>::iterator end = next(last, -(is_odd * pair_lvl));
+
+	//troca de pares dentro do container.
+	//aqui os pares sao comparados e ordenados por secao
+	//sobrando o tamanho do par a cada iteracao.
+	int jump = 2 * pair_lvl;
 	
-	while (_v_values.size() > 1) 
+	for (std::vector<int>::iterator it = start; it != end; std::advance(it, jump)) //Qual biblioteca esta o std::advance() como functiona?
 	{
-		if (_v_values[0] > _v_values[1])
+		std::vector<int>::iterator this_pair = next(it, pair_lvl - 1);
+		std::vector<int>::iterator next_pair = next(it, pair_lvl * 2 - 1);
+		if (compare_its(next_pair, this_pair))
 		{
-			max.push_back(_v_values[0]);
-			min.push_back(_v_values[1]);
-		} else 
-		{
-			max.push_back(_v_values[1]);
-			min.push_back(_v_values[0]);
+			swap_pairs(this_pair, pair_lvl);
 		}
-		_v_values.erase(_v_values.begin(), _v_values.begin() + 2);
 	}
-	
-	while (min.size() > 0 && max.size() > 0)
-	{
-		_v_values.push_back(min.front());
-		_v_values.push_back(max.front());
-		min.erase(min.begin());
-		max.erase(max.begin());
-	}
-	min.clear();
-	max.clear();
-	PrintContainer(this->_v_values, "StartVectorOrdenate: ");
+
+	//recursao para continuar a ordenacao
+	DoPairsOrdenation(pair_lvl * 2);
 }
 
+std::vector<int>::iterator PmergeMe::next(std::vector<int>::iterator it, int steps)
+{
+	std::advance(it, steps);
+	return it;
+}
+
+bool PmergeMe::compare_its(std::vector<int>::iterator left, std::vector<int>::iterator right)
+{
+	PmergeMe::nbr_comparations ++;
+	return (*left < *right);
+}
+
+void	PmergeMe::swap_pairs(std::vector<int>::iterator it, int pair_lvl)
+{
+	std::vector<int>::iterator start = next(it, -pair_lvl + 1); //por que -pair_lvl
+	std::vector<int>::iterator end = next(start, pair_lvl);
+	while (start != end)
+	{
+		std::iter_swap(start, next(start, pair_lvl)); //Como funciona a iter_swap??
+		start ++;
+	}
+}
 /**********************************************/
 /*                 FUNCTIONS                  */
 /**********************************************/
