@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:37:55 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/24 15:58:27 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/24 16:26:45 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@ void	PmergeMe::VectorOrdenate()
 	this->_initial_v_time = clock();
 	DoPairsOrdenation(1);
 	PrintContainer(this->_v_values, "AFTER DoPairsOrdenation: ");
-	DoMergeInsertionSort();
+	//DoMergeInsertionSort();
 	this->_end_v_time = clock();
 }
 
@@ -108,13 +108,13 @@ void	PmergeMe::DoPairsOrdenation(int pair_lvl)
 	PrintContainer(this->_v_values, msg);
 	std::cout << "\n";
 	DoPairsOrdenation(pair_lvl * 2);
+	//DoMergeInsertionSort();
 }
 
 void PmergeMe::DoMergeInsertionSort()
 {
 	std::vector<int>main;
 	std::vector<int>pend;
-
 
 	main.insert(main.end(), this->_v_values[0]);
 	main.insert(main.end(), this->_v_values[1]);
@@ -125,10 +125,8 @@ void PmergeMe::DoMergeInsertionSort()
 		else
 			main.insert(main.end(), this->_v_values[i]);
 	}
-	
 	PrintContainer(main, "Main :");
 	PrintContainer(pend, "Pend :");
-
 }
 std::vector<int>::iterator PmergeMe::next(std::vector<int>::iterator it, int steps)
 {
