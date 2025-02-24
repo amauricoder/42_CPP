@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:37:54 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/18 18:37:35 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/24 13:41:10 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,14 +20,15 @@
 #include <cctype> // isdigit()
 #include <algorithm> //std::swap
 #include <ctime> //clock()
+#include <sstream>
 
 class PmergeMe 
 {
 	private:
 		std::vector<int>					_v_values; 
-		std::deque<int>						_d_values; 
+		//std::deque<int>						_d_values; 
 		std::vector<std::pair<int, int> >	_v_pairs; //maybe this will not be necessary
-		std::deque<std::pair<int, int> >	_d_pairs; //maybe this will not be necessary
+		//std::deque<std::pair<int, int> >	_d_pairs; //maybe this will not be necessary
 		clock_t								_initial_v_time;
 		clock_t								_end_v_time;
 		int									_qt_elements;
@@ -55,12 +56,13 @@ class PmergeMe
 			}
 			std::cout << std::endl;
 		}
-	//METHODS
+	//METHODS VECTOR
 		void						VectorOrdenate();
 		void						DoPairsOrdenation(int pair_lvl);
 		std::vector<int>::iterator 	next(std::vector<int>::iterator it, int steps);
 		bool						compare_its(std::vector<int>::iterator left, std::vector<int>::iterator right);
 		void						swap_pairs(std::vector<int>::iterator it, int pair_lvl);
+		void						DoMergeInsertionSort();
 };
 
 /********** FUNCTIONS ***********/
