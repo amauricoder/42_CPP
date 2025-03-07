@@ -3,29 +3,29 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+         #
+#    By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 19:54:51 by aconceic          #+#    #+#              #
-#    Updated: 2025/02/11 12:49:11 by aconceic         ###   ########.fr        #
+#    Updated: 2025/02/25 14:47:29 by aconceic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = c++
-CFLAGS = -g -Wall -Wextra -Werror -std=c++98
+CC = clang++
+CFLAGS = -g -ggdb3 -O0 -Wall -Wextra -std=c++98 #-Werror
 
 NAME = PmergeMe
-SRC = main.cpp PmergeMe.cpp \
+SRC = main.cpp PmergeMe.cpp
 
 OBJ_DIR = ./objs/
 OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
 
-all :$(NAME)
+all: $(NAME)
 
 $(OBJ_DIR):
 	mkdir -p $(OBJ_DIR)
 
 $(NAME): $(OBJ)
-	$(CC)  $(CFLAGS) $(OBJ) -o $(NAME)
+	$(CC) $(CFLAGS) $(OBJ) -o $(NAME)
 
 $(OBJ_DIR)%.o: %.cpp | $(OBJ_DIR)
 	$(CC) $(CFLAGS) -c $< -o $@
@@ -33,8 +33,7 @@ $(OBJ_DIR)%.o: %.cpp | $(OBJ_DIR)
 clean:
 	rm -rf $(OBJ_DIR)
 
-fclean:
+fclean: clean
 	rm -rf $(NAME)
-	rm -rf objs
 
 re: fclean all
