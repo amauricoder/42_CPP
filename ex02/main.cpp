@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:35:36 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/13 15:02:51 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:43:12 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ int	main(int argc, char **argv)
 	if (!is_argument_valid(argc, input))
 		return (EXIT_FAILURE);
 	
-	PmergeMe	to_sort(input);
-	to_sort.VectorOrdenate();
+	PmergeMe	to_sort_vector(input);
+	to_sort_vector.VectorOrdenate();
+	
+	PmergeMe	to_sort_deque(input);
+	to_sort_deque.DequeOrdenate();
 	return (0);
 }

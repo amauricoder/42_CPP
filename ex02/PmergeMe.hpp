@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:37:54 by aconceic          #+#    #+#             */
-/*   Updated: 2025/03/07 16:40:49 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/03/26 12:47:35 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,14 +21,17 @@
 #include <algorithm> //std::swap
 #include <ctime> //clock()
 #include <sstream>
+#include <iomanip> // std::setprecision(6)
 
 class PmergeMe 
 {
 	private:
 		std::vector<int>					_v_values; 
-		//std::deque<int>						_d_values; 
-		clock_t								_initial_v_time;
-		clock_t								_end_v_time;
+		std::deque<int>						_d_values; 
+		clock_t								_vector_initial_time;
+		clock_t								_vector_end_time;
+		clock_t								_deque_initial_time;
+		clock_t								_deque_end_time;
 		int									_qt_elements;
 		PmergeMe();
 	public:
@@ -59,10 +62,14 @@ class PmergeMe
 	/*                              METHODS VECTOR                                */
 	/******************************************************************************/
 		void									VectorOrdenate();
-		void									DoPairsOrdenation(int pair_lvl);
+		void									DoVectorPairsOrdenation(int pair_lvl);
 		std::vector<int>::iterator 				AdvanceIterator(std::vector<int>::iterator it, int steps);
 		void									SwapPairs(std::vector<int>::iterator it, int pair_lvl);
-		void									DoInsertion(int pair_lvl, int pair_qt, std::vector<int>::iterator end);
+	/******************************************************************************/
+	/*                              METHODS DEQUE                                 */
+	/******************************************************************************/
+		void									DequeOrdenate();
+		
 };
 
 /********** FUNCTIONS ***********/
@@ -74,10 +81,13 @@ bool	have_invalid_char(std::string content);
 /*         ERROR TREATMENT/DEBUG         */
 int		failure_msg(std::string msg, int ret_value);
 void	print_iterators(const std::vector<std::vector<int>::iterator> &vec, std::string prefix_msg);
+long 	_jacobsthal_number(long n);
 
 template <typename T>
-void	PrintContainer(T container, std::string prefix_msg)
+void	PrintContainer(T container, std::string prefix_msg, int lvl)
 {
+	if (lvl)
+		std::cout << "Pair level :" << lvl << std::endl;
 	typename T::iterator it = container.begin();
 	typename T::iterator end = container.end();
 	if (!prefix_msg.empty())
