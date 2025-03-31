@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:37:54 by aconceic          #+#    #+#             */
-/*   Updated: 2025/03/26 12:47:35 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/03/28 12:48:01 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,6 +69,9 @@ class PmergeMe
 	/*                              METHODS DEQUE                                 */
 	/******************************************************************************/
 		void									DequeOrdenate();
+		void									DoDequePairsOrdenation(int pair_lvl);
+		std::deque<int>::iterator				AdvanceDequeIterator(std::deque<int>::iterator it, int steps);
+		void									SwapDequePairs(std::deque<int>::iterator it, int pair_lvl);
 		
 };
 
