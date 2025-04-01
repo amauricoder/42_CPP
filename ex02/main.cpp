@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:35:36 by aconceic          #+#    #+#             */
-/*   Updated: 2025/03/26 12:43:12 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/04/01 17:23:56 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,5 +23,6 @@ int	main(int argc, char **argv)
 	
 	PmergeMe	to_sort_deque(input);
 	to_sort_deque.DequeOrdenate();
-	return (0);
+
+	return (check_ordenation(to_sort_vector, to_sort_deque));
 }

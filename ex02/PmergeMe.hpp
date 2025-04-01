@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.hpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:37:54 by aconceic          #+#    #+#             */
-/*   Updated: 2025/03/28 12:48:01 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:33:33 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 #include <ctime> //clock()
 #include <sstream>
 #include <iomanip> // std::setprecision(6)
+#include <cmath> //to pow
 
 class PmergeMe 
 {
@@ -43,6 +44,12 @@ class PmergeMe
 		//Other Constructor
 		PmergeMe(std::vector<std::string> input);
 	/******************************************************************************/
+	/*                              GETTER                                        */
+	/******************************************************************************/
+	std::vector<int> 	GetVector();
+	std::deque<int> 	GetDeque();
+
+	/******************************************************************************/
 	/*                              TEMPLATES                                     */
 	/******************************************************************************/
 		//for comparitions
@@ -53,7 +60,7 @@ class PmergeMe
 		}
 
 		template <typename T>
-		T AdvanceIterator2(T it, int steps)
+		T AdvanceIterator(T it, int steps)
 		{
 			std::advance(it, steps);
 			return it;
@@ -62,17 +69,16 @@ class PmergeMe
 	/*                              METHODS VECTOR                                */
 	/******************************************************************************/
 		void									VectorOrdenate();
-		void									DoVectorPairsOrdenation(int pair_lvl);
-		std::vector<int>::iterator 				AdvanceIterator(std::vector<int>::iterator it, int steps);
+		void									DoMergeInsertVector(int pair_lvl);
+		std::vector<int>::iterator 				AdvanceVecIterator(std::vector<int>::iterator it, int steps);
 		void									SwapPairs(std::vector<int>::iterator it, int pair_lvl);
 	/******************************************************************************/
 	/*                              METHODS DEQUE                                 */
 	/******************************************************************************/
 		void									DequeOrdenate();
-		void									DoDequePairsOrdenation(int pair_lvl);
+		void									DoMergeInsertDeque(int pair_lvl);
 		std::deque<int>::iterator				AdvanceDequeIterator(std::deque<int>::iterator it, int steps);
 		void									SwapDequePairs(std::deque<int>::iterator it, int pair_lvl);
-		
 };
 
 /********** FUNCTIONS ***********/
@@ -84,7 +90,8 @@ bool	have_invalid_char(std::string content);
 /*         ERROR TREATMENT/DEBUG         */
 int		failure_msg(std::string msg, int ret_value);
 void	print_iterators(const std::vector<std::vector<int>::iterator> &vec, std::string prefix_msg);
-long 	_jacobsthal_number(long n);
+long 	jacobsthal_nbr(long n);
+int		check_ordenation(PmergeMe vec, PmergeMe deq);
 
 template <typename T>
 void	PrintContainer(T container, std::string prefix_msg, int lvl)

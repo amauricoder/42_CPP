@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   PmergeMe.cpp                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:37:55 by aconceic          #+#    #+#             */
-/*   Updated: 2025/03/28 13:04:26 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/04/01 18:47:27 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,6 +59,20 @@ PmergeMe::PmergeMe(std::vector<std::string> input)
 	this->_qt_elements = input.size();
 }
 
+
+/******************************************************************************/
+/*                              GETTER                                        */
+/******************************************************************************/
+std::vector<int> PmergeMe::GetVector()
+{
+	return (this->_v_values);
+}
+
+std::deque<int> PmergeMe::GetDeque()
+{
+	return (this->_d_values);	
+}
+
 /******************************************************************************/
 /*                              METHODS VECTOR                                */
 /******************************************************************************/
@@ -68,70 +82,64 @@ void	PmergeMe::VectorOrdenate()
 
 	PrintContainer(this->_v_values, "Before : ", 0);
 	this->_vector_initial_time = clock();
-	DoVectorPairsOrdenation(1);
+	DoMergeInsertVector(1);
 	this->_vector_end_time = clock();
 	double total_time = static_cast<double>(this->_vector_end_time - this->_vector_initial_time) / CLOCKS_PER_SEC;
 	PrintContainer(this->_v_values, "After : ", 0);
 	std::cout << "Time to process range of " 
 		<< this->_v_values.size() << " elements with std::vector: "
-		<< std::fixed << std::setprecision(6) << total_time << " s\n";
+		<< std::fixed << std::setprecision(6) << total_time << " us\n";
 }
 
-void	PmergeMe::DoVectorPairsOrdenation(int pair_lvl)
+void	PmergeMe::DoMergeInsertVector(int pair_lvl)
 {
 	typedef std::vector<int>::iterator Iterator;
+	
 	//Count numbers of pairs. If there are no pairs, stop recurtion.
 	int	pair_qt = this->_v_values.size() / pair_lvl;
 	if (pair_qt < 2)
 		return ;
 	
-	bool is_odd = pair_qt % 2 == 1;
+	//check if has stray itens
+	bool has_stray = pair_qt % 2 == 1;
 
-	//determina o inicio e fim da iteracao
+	//determines the beginning and end of operation
 	Iterator start = this->_v_values.begin();
-	Iterator last = AdvanceIterator2(this->_v_values.begin(), pair_lvl * (pair_qt));
-	Iterator end = AdvanceIterator2(last, -(is_odd * pair_lvl));
+	Iterator last = AdvanceIterator(this->_v_values.begin(), pair_lvl * (pair_qt));
+	Iterator end = AdvanceIterator(last, -(has_stray * pair_lvl));
 
-	//troca de pares dentro do container.
-	//aqui os pares sao comparados e ordenados por secao
-	//sobrando o tamanho do par a cada iteracao.
+	//swap pairs inside the container
+	//here, the pairs are swapped by section
+	//changing the pair by each iteration
 	int jump = 2 * pair_lvl;
 	for (Iterator it = start; it != end; std::advance(it, jump))
 	{
-		Iterator this_el = AdvanceIterator(it, pair_lvl - 1);
-		Iterator next_el = AdvanceIterator(it, pair_lvl * 2 - 1);
+		Iterator this_el = AdvanceVecIterator(it, pair_lvl - 1);
+		Iterator next_el = AdvanceVecIterator(it, pair_lvl * 2 - 1);
 		if (CompareIterators(next_el, this_el))
 			SwapPairs(this_el, pair_lvl);
 	}
 
-	//recursao para continuar a ordenacao
-	/* std::ostringstream oss;
-	oss << "During " << pair_lvl << " pair level :"; 
-	std::string msg = oss.str();
-	PrintContainer(this->_v_values, msg);
-	std::cout << "\n"; */
-
-	DoVectorPairsOrdenation(pair_lvl * 2);
-	//DoInsertion(pair_lvl, pair_qt, end);
+	DoMergeInsertVector(pair_lvl * 2);
 	std::vector<Iterator>main;
 	std::vector<Iterator>pend;
 
 	//init main with {b1, a1}
-	main.insert(main.end(), AdvanceIterator(this->_v_values.begin(), pair_lvl - 1));
-	main.insert(main.end(), AdvanceIterator(this->_v_values.begin(), pair_lvl * 2 - 1));
+	main.insert(main.end(), AdvanceVecIterator(this->_v_values.begin(), pair_lvl - 1));
+	main.insert(main.end(), AdvanceVecIterator(this->_v_values.begin(), pair_lvl * 2 - 1));
 	
 	//insert the rest of a's into main chain
 	//insert the rest of b's into the pend
 	for (int i = 4; i <= pair_qt; i += 2)
 	{
-		pend.insert(pend.end(), AdvanceIterator2(this->_v_values.begin(), pair_lvl * (i - 1) - 1));
-		main.insert(main.end(), AdvanceIterator2(this->_v_values.begin(), pair_lvl * i - 1));
+		pend.insert(pend.end(), AdvanceIterator(this->_v_values.begin(), pair_lvl * (i - 1) - 1));
+		main.insert(main.end(), AdvanceIterator(this->_v_values.begin(), pair_lvl * i - 1));
 	}
 
 	//insert odd element
-	if (is_odd)
+	if (has_stray)
 	{
-		pend.insert(pend.end(), AdvanceIterator2(end, pair_lvl - 1));
+		pend.insert(pend.end(), AdvanceIterator(end, pair_lvl - 1));
 	}
 
 	 /* Insert the pend into the main in the order determined by the
@@ -142,20 +150,20 @@ void	PmergeMe::DoVectorPairsOrdenation(int pair_lvl)
        of the container.
     	We can calculate the index of the bound element. With the way I do it,
         the index of the bound is inserted_numbers + current_jacobsthal_number. */
-	int prev_jacobsthal = _jacobsthal_number(1);
+	int prev_jacobsthal = jacobsthal_nbr(1);
 	int inserted_numbers = 0;
 	for (int k = 2; true; k ++)
 	{
-		int curr_jacobsthal = _jacobsthal_number(k);
+		int curr_jacobsthal = jacobsthal_nbr(k);
 		int jacobsthal_diff = curr_jacobsthal - prev_jacobsthal;
 		int offset = 0;
 		if (jacobsthal_diff > static_cast<int>(pend.size()))
             break;
 		int nbr_of_times = jacobsthal_diff;
 		std::vector<Iterator>::iterator pend_it = 
-			AdvanceIterator2(pend.begin(), jacobsthal_diff - 1);
+			AdvanceIterator(pend.begin(), jacobsthal_diff - 1);
 		std::vector<Iterator>::iterator bound_it =
-            AdvanceIterator2(main.begin(), curr_jacobsthal + inserted_numbers);
+            AdvanceIterator(main.begin(), curr_jacobsthal + inserted_numbers);
 		while (nbr_of_times)
 		{
 			std::vector<Iterator>::iterator idx =
@@ -168,7 +176,7 @@ void	PmergeMe::DoVectorPairsOrdenation(int pair_lvl)
 			   When this happens, it eclipses the bound of the next pend, and it does more comparisons
 			   than it should. We need to offset when this happens. */
 			   offset += (inserted - main.begin()) == curr_jacobsthal + inserted_numbers;
-			   bound_it = next(main.begin(), curr_jacobsthal + inserted_numbers - offset);
+			   bound_it = AdvanceIterator(main.begin(), curr_jacobsthal + inserted_numbers - offset);
 		}
 		prev_jacobsthal = curr_jacobsthal;
         inserted_numbers += jacobsthal_diff;
@@ -184,9 +192,9 @@ void	PmergeMe::DoVectorPairsOrdenation(int pair_lvl)
 	   for (size_t i = 0; i < pend.size(); i++)
 	   {
 			std::vector<std::vector<int>::iterator>::iterator curr_pend = 
-		   		AdvanceIterator2(pend.begin(), i);
+		   		AdvanceIterator(pend.begin(), i);
 			std::vector<std::vector<int>::iterator>::iterator curr_bound =
-		   		AdvanceIterator2(main.begin(), main.size() - pend.size() + i + is_odd);
+		   		AdvanceIterator(main.begin(), main.size() - pend.size() + i + has_stray);
 			std::vector<std::vector<int>::iterator>::iterator idx =
 			   std::upper_bound(main.begin(), curr_bound, *curr_pend, CompareIterators<std::vector<int>::iterator>);
 		   main.insert(idx, *curr_pend);
@@ -205,7 +213,6 @@ void	PmergeMe::DoVectorPairsOrdenation(int pair_lvl)
 				copy.insert(copy.end(), *pair_start);
 			}
 		}
-		//PrintContainer(this->_v_values, "COPY: ");
 
 		/* Replace values in the original container. */
 		Iterator container_it = this->_v_values.begin();
@@ -218,7 +225,7 @@ void	PmergeMe::DoVectorPairsOrdenation(int pair_lvl)
    		}
 }
 
-std::vector<int>::iterator PmergeMe::AdvanceIterator(std::vector<int>::iterator it, int steps)
+std::vector<int>::iterator PmergeMe::AdvanceVecIterator(std::vector<int>::iterator it, int steps)
 {
 	std::advance(it, steps);
 	return it;
@@ -226,11 +233,11 @@ std::vector<int>::iterator PmergeMe::AdvanceIterator(std::vector<int>::iterator 
 
 void	PmergeMe::SwapPairs(std::vector<int>::iterator it, int pair_lvl)
 {
-	std::vector<int>::iterator start = AdvanceIterator(it, -pair_lvl + 1);
-	std::vector<int>::iterator end = AdvanceIterator(start, pair_lvl);
+	std::vector<int>::iterator start = AdvanceVecIterator(it, -pair_lvl + 1);
+	std::vector<int>::iterator end = AdvanceVecIterator(start, pair_lvl);
 	while (start != end)
 	{
-		std::iter_swap(start, AdvanceIterator(start, pair_lvl));
+		std::iter_swap(start, AdvanceVecIterator(start, pair_lvl));
 		start ++;
 	}
 }
@@ -240,18 +247,18 @@ void	PmergeMe::SwapPairs(std::vector<int>::iterator it, int pair_lvl)
 /******************************************************************************/
 void	PmergeMe::DequeOrdenate()
 {
-	PrintContainer(this->_d_values, "Before : ", 0);
+	//PrintContainer(this->_d_values, "Before : ", 0);
 	this->_deque_initial_time = clock();
-	DoDequePairsOrdenation(1);
+	DoMergeInsertDeque(1);
 	this->_deque_end_time = clock();
 	double total_time = static_cast<double>(this->_deque_end_time - this->_deque_initial_time) / CLOCKS_PER_SEC;
-	PrintContainer(this->_d_values, "After : ", 0);
+	//PrintContainer(this->_d_values, "After : ", 0);
 	std::cout << "Time to process range of " 
 		<< this->_qt_elements << " elements with std::deque: "
-		<< std::fixed << std::setprecision(6) << total_time << " s\n";
+		<< std::fixed << std::setprecision(6) << total_time << " us\n";
 }
 
-void	PmergeMe::DoDequePairsOrdenation(int pair_lvl)
+void	PmergeMe::DoMergeInsertDeque(int pair_lvl)
 {
 	typedef std::deque<int>::iterator Iterator;
 
@@ -259,77 +266,52 @@ void	PmergeMe::DoDequePairsOrdenation(int pair_lvl)
 	if (pair_qt < 2)
 		return ;
 	
-	bool is_odd = pair_qt % 2 == 1;
+	bool has_stray = pair_qt % 2 == 1;
 
-	//determina o inicio e fim da iteracao
 	Iterator start = this->_d_values.begin();
-	Iterator last = AdvanceIterator2(this->_d_values.begin(), pair_lvl * (pair_qt));
-	Iterator end = AdvanceIterator2(last, -(is_odd * pair_lvl));
+	Iterator last = AdvanceIterator(this->_d_values.begin(), pair_lvl * (pair_qt));
+	Iterator end = AdvanceIterator(last, -(has_stray * pair_lvl));
 
-	//troca de pares dentro do container.
-	//aqui os pares sao comparados e ordenados por secao
-	//sobrando o tamanho do par a cada iteracao.
 	int jump = 2 * pair_lvl;
 	for (Iterator it = start; it != end; std::advance(it, jump))
 	{
-		Iterator this_el = AdvanceIterator2(it, pair_lvl - 1);
-		Iterator next_el = AdvanceIterator2(it, pair_lvl * 2 - 1);
+		Iterator this_el = AdvanceIterator(it, pair_lvl - 1);
+		Iterator next_el = AdvanceIterator(it, pair_lvl * 2 - 1);
 		if (CompareIterators(next_el, this_el))
 			SwapDequePairs(this_el, pair_lvl);
 	}
 
-	//recursao para continuar a ordenacao
-	/* std::ostringstream oss;
-	oss << "During " << pair_lvl << " pair level :"; 
-	std::string msg = oss.str();
-	PrintContainer(this->_v_values, msg);
-	std::cout << "\n"; */
-
-	DoDequePairsOrdenation(pair_lvl * 2);
-	//DoInsertion(pair_lvl, pair_qt, end);
+	DoMergeInsertDeque(pair_lvl * 2);
 	std::deque<Iterator>main;
 	std::deque<Iterator>pend;
 
-	//init main with {b1, a1}
-	main.insert(main.end(), AdvanceIterator2(this->_d_values.begin(), pair_lvl - 1));
-	main.insert(main.end(), AdvanceIterator2(this->_d_values.begin(), pair_lvl * 2 - 1));
-	
-	//insert the rest of a's into main chain
-	//insert the rest of b's into the pend
+	main.insert(main.end(), AdvanceIterator(this->_d_values.begin(), pair_lvl - 1));
+	main.insert(main.end(), AdvanceIterator(this->_d_values.begin(), pair_lvl * 2 - 1));
 	for (int i = 4; i <= pair_qt; i += 2)
 	{
-		pend.insert(pend.end(), AdvanceIterator2(this->_d_values.begin(), pair_lvl * (i - 1) - 1));
-		main.insert(main.end(), AdvanceIterator2(this->_d_values.begin(), pair_lvl * i - 1));
+		pend.insert(pend.end(), AdvanceIterator(this->_d_values.begin(), pair_lvl * (i - 1) - 1));
+		main.insert(main.end(), AdvanceIterator(this->_d_values.begin(), pair_lvl * i - 1));
 	}
 
-	//insert odd element
-	if (is_odd)
+	if (has_stray)
 	{
-		pend.insert(pend.end(), AdvanceIterator2(end, pair_lvl - 1));
+		pend.insert(pend.end(), AdvanceIterator(end, pair_lvl - 1));
 	}
 
-	 /* Insert the pend into the main in the order determined by the
-       Jacobsthal numbers. For example: 3 2 -> 5 4 -> 11 10 9 8 7 6 -> etc.
-       During insertion, main numbers serve as an upper bound for inserting numbers,
-       in order to save number of comparisons, as we know already that, for example,
-       b5 is lesser than a5, we binary search only until a5, not until the end
-       of the container.
-    	We can calculate the index of the bound element. With the way I do it,
-        the index of the bound is inserted_numbers + current_jacobsthal_number. */
-	int prev_jacobsthal = _jacobsthal_number(1);
+	int prev_jacobsthal = jacobsthal_nbr(1);
 	int inserted_numbers = 0;
 	for (int k = 2; true; k ++)
 	{
-		int curr_jacobsthal = _jacobsthal_number(k);
+		int curr_jacobsthal = jacobsthal_nbr(k);
 		int jacobsthal_diff = curr_jacobsthal - prev_jacobsthal;
 		int offset = 0;
 		if (jacobsthal_diff > static_cast<int>(pend.size()))
             break;
 		int nbr_of_times = jacobsthal_diff;
 		std::deque<Iterator>::iterator pend_it = 
-			AdvanceIterator2(pend.begin(), jacobsthal_diff - 1);
+			AdvanceIterator(pend.begin(), jacobsthal_diff - 1);
 		std::deque<Iterator>::iterator bound_it =
-            AdvanceIterator2(main.begin(), curr_jacobsthal + inserted_numbers);
+            AdvanceIterator(main.begin(), curr_jacobsthal + inserted_numbers);
 		while (nbr_of_times)
 		{
 			std::deque<Iterator>::iterator idx =
@@ -338,51 +320,36 @@ void	PmergeMe::DoDequePairsOrdenation(int pair_lvl)
 			nbr_of_times--;
 			pend_it = pend.erase(pend_it);
 			std::advance(pend_it, -1);
-			/* Sometimes the inserted number in inserted at the exact index of where the bound should be.
-			   When this happens, it eclipses the bound of the next pend, and it does more comparisons
-			   than it should. We need to offset when this happens. */
-			   offset += (inserted - main.begin()) == curr_jacobsthal + inserted_numbers;
-			   bound_it = next(main.begin(), curr_jacobsthal + inserted_numbers - offset);
+			offset += (inserted - main.begin()) == curr_jacobsthal + inserted_numbers;
+			bound_it = AdvanceIterator(main.begin(), curr_jacobsthal + inserted_numbers - offset);
 		}
 		prev_jacobsthal = curr_jacobsthal;
         inserted_numbers += jacobsthal_diff;
 		offset = 0;
 	}
 	
-	/* Insert the remaining elements in the sequential order. Here we also want to
-       perform as less comparisons as possible, so we calculate the starting bound
-       to insert pend number to be the pair of the first pend number. If the first
-       pend number is b6, the bound is a6, if the pend number is b8, the bound is a8 etc.
-       With the way I do it the index of bound is
-       size_of_main - size_of_pend + index_of_current_pend. */
 	   for (size_t i = 0; i < pend.size(); i++)
 	   {
 			std::deque<std::deque<int>::iterator>::iterator curr_pend = 
-		   		AdvanceIterator2(pend.begin(), i);
+		   		AdvanceIterator(pend.begin(), i);
 			std::deque<std::deque<int>::iterator>::iterator curr_bound =
-		   		AdvanceIterator2(main.begin(), main.size() - pend.size() + i + is_odd);
+		   		AdvanceIterator(main.begin(), main.size() - pend.size() + i + has_stray);
 			std::deque<std::deque<int>::iterator>::iterator idx =
 			   std::upper_bound(main.begin(), curr_bound, *curr_pend, CompareIterators<std::deque<int>::iterator>);
 		   main.insert(idx, *curr_pend);
 	   }
 
-	    /* Use copy deque to store all the numbers, in order not to overwrite the
-    	original iterators. */
 		std::deque<int> copy;
-		//copy.resize(this->_d_values.size());
 	   	for (std::deque<std::deque<int>::iterator>::iterator it = main.begin(); it != main.end(); it++)
 	   	{
 			for (int i = 0; i < pair_lvl; i++)
 			{
 				std::deque<int>::iterator pair_start = *it;
 				std::advance(pair_start, -pair_lvl + i + 1);
-				//copy.insert(copy.end(), *pair_start);
 				copy.push_back(*pair_start);
 			}
 		}
-		//PrintContainer(this->_d_values, "COPY: ", pair_lvl);
 
-		/* Replace values in the original container. */
 		Iterator container_it = this->_d_values.begin();
     	std::deque<int>::iterator copy_it = copy.begin();
     	while (copy_it != copy.end())
@@ -401,14 +368,15 @@ std::deque<int>::iterator PmergeMe::AdvanceDequeIterator(std::deque<int>::iterat
 
 void	PmergeMe::SwapDequePairs(std::deque<int>::iterator it, int pair_lvl)
 {
-	std::deque<int>::iterator start = AdvanceIterator2(it, -pair_lvl + 1);
-	std::deque<int>::iterator end = AdvanceIterator2(start, pair_lvl);
+	std::deque<int>::iterator start = AdvanceIterator(it, -pair_lvl + 1);
+	std::deque<int>::iterator end = AdvanceIterator(start, pair_lvl);
 	while (start != end)
 	{
-		std::iter_swap(start, AdvanceIterator2(start, pair_lvl));
+		std::iter_swap(start, AdvanceIterator(start, pair_lvl));
 		start ++;
 	}
 }
+
 /******************************************************************************/
 /*                              GENERAL FUNCTIONS                             */
 /******************************************************************************/
@@ -420,7 +388,10 @@ bool 	is_argument_valid(int argc, std::vector<std::string> input)
 	if (argc == 1)
 		return (failure_msg("Error!\nInvalid argument.", false));
 
-	std::vector<std::string>::iterator it = input.begin() + 1;
+	if (argc == 2)
+		return (failure_msg("Error\nYou need to have more than one number", false));
+		
+	std::vector<std::string>::iterator it = input.begin();
 	while (it != input.end())
 	{
 		if (it->empty() || have_invalid_char((*it)))
@@ -459,4 +430,28 @@ void print_iterators(const std::vector<std::vector<int>::iterator> &vec, std::st
     std::cout << std::endl;
 }
 
-long _jacobsthal_number(long n) { return round((pow(2, n + 1) + pow(-1, n)) / 3); }
+long jacobsthal_nbr(long n) { return round((pow(2, n + 1) + pow(-1, n)) / 3); }
+
+
+int	check_ordenation(PmergeMe vec_obj, PmergeMe deq_obj)
+{
+	std::vector<int> 	vec = vec_obj.GetVector();
+	std::deque<int> 	deq = deq_obj.GetDeque();
+
+
+	for (std::vector<int>::iterator 	vec_it = vec.begin(); vec_it != vec.end() - 1; vec_it ++)
+	{
+		if ((*vec_it) > *(vec_it + 1))
+			return(failure_msg("Vector not ordenated", 1));
+	}
+
+	for (std::deque<int>::iterator 	dev_it = deq.begin(); dev_it != deq.end() - 1; dev_it ++)
+	{
+		if ((*dev_it) > *(dev_it + 1))
+			return(failure_msg("Deque not ordenated", 1));
+	}
+
+	(void)deq_obj;
+
+	return (0);
+}

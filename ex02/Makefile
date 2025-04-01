@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+         #
+#    By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/01/23 19:54:51 by aconceic          #+#    #+#              #
-#    Updated: 2025/02/25 14:47:29 by aconceic         ###   ########.fr        #
+#    Updated: 2025/03/31 16:01:49 by aconceic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-CC = clang++
-CFLAGS = -g -ggdb3 -O0 -Wall -Wextra -std=c++98 #-Werror
+CC = c++
+CFLAGS = -O0 -Wall -Wextra -Werror -std=c++98 #-ggdb3 #-g
 
 NAME = PmergeMe
 SRC = main.cpp PmergeMe.cpp
