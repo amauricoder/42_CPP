@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:37:54 by aconceic          #+#    #+#             */
-/*   Updated: 2025/04/01 18:33:33 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:09:25 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,16 +27,11 @@
 class PmergeMe 
 {
 	private:
-		std::vector<int>					_v_values; 
-		std::deque<int>						_d_values; 
-		clock_t								_vector_initial_time;
-		clock_t								_vector_end_time;
-		clock_t								_deque_initial_time;
-		clock_t								_deque_end_time;
+		std::vector<int>					_v_values;
+		std::deque<int>						_d_values;
 		int									_qt_elements;
 		PmergeMe();
 	public:
-		static int nbr_comparations;
 		// ORTHODOX
 		PmergeMe(PmergeMe const &src);
 		PmergeMe& operator=(PmergeMe const &src);
@@ -55,7 +50,6 @@ class PmergeMe
 		//for comparitions
 		template <typename T> 
 		static bool CompareIterators(T lv, T rv) {
-			PmergeMe::nbr_comparations++;
 			return *lv < *rv;
 		}
 
@@ -94,7 +88,7 @@ long 	jacobsthal_nbr(long n);
 int		check_ordenation(PmergeMe vec, PmergeMe deq);
 
 template <typename T>
-void	PrintContainer(T container, std::string prefix_msg, int lvl)
+void	print_container(T container, std::string prefix_msg, int lvl)
 {
 	if (lvl)
 		std::cout << "Pair level :" << lvl << std::endl;

@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 09:12:10 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/10 18:48:21 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:51:24 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ bool	is_argument_valid(int argc, char **argv)
 }
 
 /*              RPN              */
-
+//main function
 int do_rpn(std::string expr)
 {
 	std::stack<int> s;
@@ -50,24 +50,25 @@ int do_rpn(std::string expr)
 	{
 		if (std::isdigit(expr[i]))
 		{
-			expr_nbr = std::atoi(expr.substr(i, i+1).c_str());
+			expr_nbr = std::atoi(expr.substr(i, i + 1).c_str());
 			s.push(expr_nbr);
 		}
 		if (operators.find(expr[i]) != std::string::npos)
 		{
 			if (s.size() < 2)
 				return (failure_msg("Error!\nInvalid Expression.", EXIT_FAILURE));
-			do_operation(expr[i], s);
+			if (do_operation(expr[i], s))
+				return (EXIT_FAILURE);
 		}
 		i ++;
 	}
-	if (s.size() > 1 || i == 1)
+	if (s.size() > 1)
 				return (failure_msg("Error!\nInvalid Expression.", EXIT_FAILURE));
 	print_stack(s);
 	return (EXIT_SUCCESS);
 }
 
-void	do_operation(char op, std::stack<int> &s)
+int	do_operation(char op, std::stack<int> &s)
 {
 	int		new_value = 0;
 	int		second_value = 0;
@@ -89,7 +90,7 @@ void	do_operation(char op, std::stack<int> &s)
 		second_value = s.top();
 		s.pop();
 		if (new_value == 0)
-			exit(failure_msg("Error\nNaN.", EXIT_FAILURE));
+			return(failure_msg("Error\nNaN.", EXIT_FAILURE));
 		new_value = second_value / new_value;
 	}
 	else if (op == '-')
@@ -99,6 +100,7 @@ void	do_operation(char op, std::stack<int> &s)
 		new_value = second_value - new_value;
 	}
 	s.push(new_value);
+	return (EXIT_SUCCESS);
 }
 
 /**********************************************/

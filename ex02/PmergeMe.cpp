@@ -6,13 +6,11 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/11 12:37:55 by aconceic          #+#    #+#             */
-/*   Updated: 2025/04/01 18:47:27 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/04/02 16:09:25 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "PmergeMe.hpp"
-
-int PmergeMe::nbr_comparations = 0;
 
 /******************************************************************************/
 /*                       ORTHODOX and CONSTRUCTORS                            */
@@ -32,8 +30,6 @@ PmergeMe& PmergeMe::operator=(PmergeMe const &src)
 	{
 		this->_v_values = src._v_values;
 		this->_d_values = src._d_values;
-		this->_vector_end_time = 0;
-		this->_vector_initial_time = 0;
 		this->_qt_elements = src._qt_elements;
 	}
 	return (*this);
@@ -54,8 +50,6 @@ PmergeMe::PmergeMe(std::vector<std::string> input)
 		this->_d_values.push_back(convertion);
 		it ++;
 	}
-	this->_vector_end_time = 0;
-	this->_vector_initial_time = 0;
 	this->_qt_elements = input.size();
 }
 
@@ -76,16 +70,19 @@ std::deque<int> PmergeMe::GetDeque()
 /******************************************************************************/
 /*                              METHODS VECTOR                                */
 /******************************************************************************/
-
+//Start vector ordenation
+//clock() returns ticks per clock. Division by clocks_per_sec to transform into seconds.
 void	PmergeMe::VectorOrdenate()
 {
+	clock_t								vector_initial_time;
+	clock_t								vector_end_time;
 
-	PrintContainer(this->_v_values, "Before : ", 0);
-	this->_vector_initial_time = clock();
+	print_container(this->_v_values, "Before : ", 0);
+	vector_initial_time = clock();
 	DoMergeInsertVector(1);
-	this->_vector_end_time = clock();
-	double total_time = static_cast<double>(this->_vector_end_time - this->_vector_initial_time) / CLOCKS_PER_SEC;
-	PrintContainer(this->_v_values, "After : ", 0);
+	vector_end_time = clock();
+	double total_time = static_cast<double>(vector_end_time - vector_initial_time) / CLOCKS_PER_SEC;
+	print_container(this->_v_values, "After : ", 0);
 	std::cout << "Time to process range of " 
 		<< this->_v_values.size() << " elements with std::vector: "
 		<< std::fixed << std::setprecision(6) << total_time << " us\n";
@@ -136,20 +133,20 @@ void	PmergeMe::DoMergeInsertVector(int pair_lvl)
 		main.insert(main.end(), AdvanceIterator(this->_v_values.begin(), pair_lvl * i - 1));
 	}
 
-	//insert odd element
+	//insert rest element
 	if (has_stray)
 	{
 		pend.insert(pend.end(), AdvanceIterator(end, pair_lvl - 1));
 	}
 
-	 /* Insert the pend into the main in the order determined by the
-       Jacobsthal numbers. For example: 3 2 -> 5 4 -> 11 10 9 8 7 6 -> etc.
-       During insertion, main numbers serve as an upper bound for inserting numbers,
-       in order to save number of comparisons, as we know already that, for example,
-       b5 is lesser than a5, we binary search only until a5, not until the end
-       of the container.
-    	We can calculate the index of the bound element. With the way I do it,
-        the index of the bound is inserted_numbers + current_jacobsthal_number. */
+	/*
+		Insert the pend into the main in the order determined by the
+    	Jacobsthal numbers.
+    	During insertion, main numbers serve as an upper bound for inserting numbers,
+		in order to save number of comparisons, as we know already that, for example,
+		b5 is lesser than a5, we binary search only until a5, not until the end
+		of the container.
+	*/
 	int prev_jacobsthal = jacobsthal_nbr(1);
 	int inserted_numbers = 0;
 	for (int k = 2; true; k ++)
@@ -172,9 +169,10 @@ void	PmergeMe::DoMergeInsertVector(int pair_lvl)
 			nbr_of_times--;
 			pend_it = pend.erase(pend_it);
 			std::advance(pend_it, -1);
-			/* Sometimes the inserted number in inserted at the exact index of where the bound should be.
-			   When this happens, it eclipses the bound of the next pend, and it does more comparisons
-			   than it should. We need to offset when this happens. */
+			/* 
+				Sometimes the inserted number is inserted at the exact index of where the bound should be.
+				We need to offset when this happens to avoid excedents comparitions.
+			*/
 			   offset += (inserted - main.begin()) == curr_jacobsthal + inserted_numbers;
 			   bound_it = AdvanceIterator(main.begin(), curr_jacobsthal + inserted_numbers - offset);
 		}
@@ -183,12 +181,10 @@ void	PmergeMe::DoMergeInsertVector(int pair_lvl)
 		offset = 0;
 	}
 	
-	/* Insert the remaining elements in the sequential order. Here we also want to
-       perform as less comparisons as possible, so we calculate the starting bound
-       to insert pend number to be the pair of the first pend number. If the first
-       pend number is b6, the bound is a6, if the pend number is b8, the bound is a8 etc.
-       With the way I do it the index of bound is
-       size_of_main - size_of_pend + index_of_current_pend. */
+	/* 
+		Insert remaining elements sequentially with minimal comparisons by starting at the position of the first pending number's pair.
+		Ex if bound is a5, we start with b5 and so on.
+    */
 	   for (size_t i = 0; i < pend.size(); i++)
 	   {
 			std::vector<std::vector<int>::iterator>::iterator curr_pend = 
@@ -200,8 +196,10 @@ void	PmergeMe::DoMergeInsertVector(int pair_lvl)
 		   main.insert(idx, *curr_pend);
 	   }
 
-	    /* Use copy vector to store all the numbers, in order not to overwrite the
-    	original iterators. */
+	    /* 	
+			Use copy vector to store all the numbers, in order not to overwrite the
+    		original iterators.
+		*/
 		std::vector<int> copy;
 		copy.reserve(this->_v_values.size());
 	   	for (std::vector<std::vector<int>::iterator>::iterator it = main.begin(); it != main.end(); it++)
@@ -247,12 +245,15 @@ void	PmergeMe::SwapPairs(std::vector<int>::iterator it, int pair_lvl)
 /******************************************************************************/
 void	PmergeMe::DequeOrdenate()
 {
-	//PrintContainer(this->_d_values, "Before : ", 0);
-	this->_deque_initial_time = clock();
+	clock_t								deque_initial_time;
+	clock_t								deque_end_time;
+
+	//print_container(this->_d_values, "Before : ", 0);
+	deque_initial_time = clock();
 	DoMergeInsertDeque(1);
-	this->_deque_end_time = clock();
-	double total_time = static_cast<double>(this->_deque_end_time - this->_deque_initial_time) / CLOCKS_PER_SEC;
-	//PrintContainer(this->_d_values, "After : ", 0);
+	deque_end_time = clock();
+	double total_time = static_cast<double>(deque_end_time - deque_initial_time) / CLOCKS_PER_SEC;
+	//print_container(this->_d_values, "After : ", 0);
 	std::cout << "Time to process range of " 
 		<< this->_qt_elements << " elements with std::deque: "
 		<< std::fixed << std::setprecision(6) << total_time << " us\n";

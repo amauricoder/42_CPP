@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/04 13:24:01 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/08 17:17:27 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:20:40 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,6 +66,10 @@ std::map<std::string, double> get_database(void)
 
 /*--------------------------- IMPUT TREATMENT ---------------------------*/
 
+/**
+ * Get file data, get the date until |, then check if the date is a vald date.
+ * Check if the quantity given is valid, then print the values.
+ */
 void	process_input(std::string path, std::map<std::string, double> btc_data)
 {
 	std::string		line, date, error_msg;
@@ -73,6 +77,7 @@ void	process_input(std::string path, std::map<std::string, double> btc_data)
 	std::ifstream	input;
 
 	input.open(path.c_str());
+	//std::getline(input, line); //uncomment this if evaluator does not accept my solution, just is just to jump the first line
 	while (std::getline(input, line))
 	{
 		std::istringstream ss(line);
@@ -94,8 +99,12 @@ void	process_input(std::string path, std::map<std::string, double> btc_data)
 
 //erase(pos,n) -> remove n chars from the pos n
 //std::remove() move all the occurences of char ' ' to the end of the string
+/* Remove invalid spaces*/
 std::string trim_date(std::string date)
 {
+	//std::cout << "THIS IS DATE " << date << std::endl;
+	if (date.length() < 10)
+		return (date);
 	for (int i = 9; date[i]; i++)
 	{
 		if (std::isalpha(date[i]))
@@ -105,6 +114,9 @@ std::string trim_date(std::string date)
 	return (date);
 }
 
+/*
+ * Check if the date format is valid following the subject Recquirements
+ */
 bool is_dateformat_valid(std::string date)
 {
 	if (date.length() == 10)
@@ -127,7 +139,9 @@ bool is_dateformat_valid(std::string date)
 	return (false);
 }
 
-
+/*
+	Check if the date is a valid, includes leap year solution.
+*/
 bool	is_date_valid(std::string date)
 {
 	int	year = std::atoi(date.substr(0, 4).c_str());

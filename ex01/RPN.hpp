@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/10 09:12:13 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/10 17:57:07 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/04/02 17:46:15 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@
 //function
 bool	is_argument_valid(int argc, char **argv);
 int 	do_rpn(std::string expr);
-void	do_operation(char op, std::stack<int> &s);
+int		do_operation(char op, std::stack<int> &s);
 
 //debug / error msg
 void	print_stack(std::stack<int> s);
