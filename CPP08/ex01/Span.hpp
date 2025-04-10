@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.hpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:51:45 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/03 13:37:56 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:33:36 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 #include <vector>
 #include <list>
 #include <sstream>
+#include <limits>
 
 #define BG_GREEN    "\033[42m"
 #define BG_BLUE     "\033[44m"

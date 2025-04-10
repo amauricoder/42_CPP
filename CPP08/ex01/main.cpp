@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:55:07 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/03 13:38:08 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:44:13 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,6 +28,7 @@ int	main(void)
 /*                  TESTS                       */
 /************************************************/
 
+//test given by the subject
 int test_subject(void)
 {
 	Span sp = Span(5);
@@ -140,15 +141,15 @@ int	test_shortestSpan_1(void)
 	sp.addNumber(100);
 	sp.addNumber(101);
 	sp.addNumber(205);
-	sp.addNumber(206);
-	sp.addNumber(207);
+	sp.addNumber(209);
+	sp.addNumber(250);
 
 	if (sp.shortestSpan() != 1)
 		return (err_invalid_test("test_shortestSpan_1", __LINE__, __FILE__));
 	return (success_msg("test_shortestSpan_1"));
 }
 
-//must go to exception
+//must go to exception because there is only 1 number on Span's vector
 int	test_shortestSpan_2(void)
 {
 	try
@@ -181,7 +182,7 @@ int	test_longestSpan_1(void)
 	return (success_msg("test_longestSpan_1"));
 }
 
-//must go to exception
+//must go to exception because there is only 1 number on Span's vector
 int	test_longestSpan_2(void)
 {
 	try
