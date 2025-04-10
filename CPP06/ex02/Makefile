@@ -1,0 +1,40 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2024/12/03 14:51:24 by aconceic          #+#    #+#              #
+#    Updated: 2025/01/14 19:14:13 by aconceic         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
+CC = c++
+CFLAGS = -g -Wall -Wextra -Werror -std=c++98 -fsanitize=address
+
+NAME = ex01
+SRC = main.cpp tests.cpp Base.cpp A.cpp B.cpp C.cpp utils.cpp \
+
+OBJ_DIR = ./objs/
+OBJ = $(addprefix $(OBJ_DIR), $(SRC:.cpp=.o))
+
+all :$(NAME)
+
+$(OBJ_DIR):
+	mkdir -p $(OBJ_DIR)
+
+$(NAME): $(OBJ)
+	$(CC)  $(CFLAGS) $(OBJ) -o $(NAME)
+
+$(OBJ_DIR)%.o: %.cpp | $(OBJ_DIR)
+	$(CC) $(CFLAGS) -c $< -o $@
+
+clean:
+	rm -rf $(OBJ_DIR)
+
+fclean:
+	rm -rf $(OBJ_DIR)
+	rm -rf $(NAME)
+
+re: fclean all
