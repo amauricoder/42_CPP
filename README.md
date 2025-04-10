@@ -91,5 +91,3 @@ Each module contains a `README.md` explaining its goals, topics, and exercises, 
 ## 🏁 Final Thoughts
 
 This repository is not only a learning journey through the C++ language but also a solid preparation for real-world development. By the end of CPP09, you’ll have touched most of the foundational and intermediate concepts in C++.
-
-Happy coding and keep improving! 🚀
