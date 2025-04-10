@@ -6,7 +6,7 @@
 /*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/11/27 16:54:00 by aconceic          #+#    #+#             */
-/*   Updated: 2024/11/28 15:11:00 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/11 14:35:23 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@
 /*                     Orthodox Canonical Form                                */
 /******************************************************************************/
 
-ScavTrap:: ScavTrap() : ClapTrap()
+ScavTrap::ScavTrap() : ClapTrap()
 {
     std::cout <<  "ScavTrap Default Constructor" << std::endl;
 	this->_hit_points = 100;
