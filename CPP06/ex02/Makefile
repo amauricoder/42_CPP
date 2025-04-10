@@ -3,15 +3,15 @@
 #                                                         :::      ::::::::    #
 #    Makefile                                           :+:      :+:    :+:    #
 #                                                     +:+ +:+         +:+      #
-#    By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+         #
+#    By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/12/03 14:51:24 by aconceic          #+#    #+#              #
-#    Updated: 2025/01/14 19:14:13 by aconceic         ###   ########.fr        #
+#    Updated: 2025/01/20 11:12:31 by aconceic         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 CC = c++
-CFLAGS = -g -Wall -Wextra -Werror -std=c++98 -fsanitize=address
+CFLAGS = -g -Wall -Wextra -Werror -std=c++98 #-fsanitize=address
 
 NAME = ex01
 SRC = main.cpp tests.cpp Base.cpp A.cpp B.cpp C.cpp utils.cpp \

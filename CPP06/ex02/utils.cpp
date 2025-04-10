@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   utils.cpp                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/14 15:29:27 by aconceic          #+#    #+#             */
-/*   Updated: 2025/01/15 15:54:44 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/01/20 11:13:22 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,7 +47,7 @@ void identify(Base& p)
 		std::cout << "Identified A class by ref" << std::endl;
 		(void)aRef;
 	}
-	catch (const std::bad_cast &e)
+	catch (const std::exception &e)
 	{
 		try
 		{
@@ -55,7 +55,7 @@ void identify(Base& p)
 			std::cout << "Identified B class by ref" << std::endl;
 			(void)bRef;
 		}
-		catch (const std::bad_cast &e)
+		catch (const std::exception &e)
 		{
 			try
 			{
@@ -63,7 +63,7 @@ void identify(Base& p)
 				std::cout << "Identified C class by ref" << std::endl;
 				(void)cRef;
 			}
-			catch (const std::bad_cast &e)
+			catch (const std::exception &e)
 			{	
 				std::cout << "Identifycation unknown by ref" << std::endl;
 			}
