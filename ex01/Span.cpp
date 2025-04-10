@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   Span.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/28 16:51:43 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/03 13:24:35 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/04 11:39:11 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,6 +76,8 @@ void	Span::addNumber(int nbr)
 	_data.push_back(nbr);
 }
 
+//Minimum Gap Problem
+//O(n) because we sort the vector before look for the minimun
 int		Span::shortestSpan(void)
 {
 	if (this->_data.size() < 2)
@@ -108,12 +110,6 @@ std::string	Span::ossSpan(void)
 	{
 		oss << (*it);
 	}
-	
-	/* for (std::vector<int>::iterator it = this->_data.begin(); it != this->_data.end(); it ++)
-	{
-		std::cout << "Number: " << (*it) << std::endl;
-	} */
-	
 	return (oss.str());
 }
 

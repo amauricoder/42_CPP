@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MutantStack.tpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:46:52 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/03 21:29:34 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/04 12:33:50 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,6 @@ template <typename T>
 MutantStack<T>::MutantStack(const MutantStack &src)
 {
 	this = src;
-	return (*this);
 }
 
 template <typename T>
@@ -72,4 +71,5 @@ typename MutantStack<T>::const_iterator MutantStack<T>::end() const
 {
 	return (this->c.end());
 }
+
 #endif

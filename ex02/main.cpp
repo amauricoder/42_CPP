@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   main.cpp                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/01/23 19:55:07 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/03 21:59:52 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:24:10 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,8 @@
 int	main(void)
 {
 	if (test_subject() || test_with_list()
-		|| test_print_using_iterator())
+		|| test_print_using_iterator() || test_print_using_iterator2()
+		|| test_using_float() || test_const_iterator())
 		return (EXIT_FAILURE);
 	return (0);
 }
@@ -25,7 +26,7 @@ int	main(void)
 /*                  TESTS                       */
 /************************************************/
 int	test_subject(void)
-{
+{	
 	MutantStack<int> mstack;
 	mstack.push(5);
 	mstack.push(17);
@@ -81,12 +82,52 @@ int	test_print_using_iterator(void)
 	return (success_msg("test_print_using_iterator"));
 }
 
+int	test_print_using_iterator2(void)
+{
+	MutantStack<std::string> st;
+	
+	st.push("primeira");
+	st.push("segunda");
+	st.push("terceira");
+	st.push("quarta");
+	st.push("quinta");
+
+	for (MutantStack<std::string>::iterator it = st.begin(); it != st.end(); it ++)
+		std::cout << (*it) << "\n";
+	return (success_msg("test_print_using_iterator2"));
+}
+
 int	test_using_float(void)
 {
 	MutantStack<float> st;
 	
+	st.push(1.13f);
+	st.push(13.42f);
+	st.push(15.25f);
+	st.push(98.12f);
+
+	for (MutantStack<float>::iterator it = st.begin(); it != st.end(); it++)
+		std::cout << (*it) << "\n";
 	return (success_msg("test_using_float"));
 }
+
+int	test_const_iterator(void)
+{
+	MutantStack<int> st;
+
+	st.push(1);
+	st.push(2);
+	st.push(3);
+
+	MutantStack<int>::const_iterator it = st.begin();
+	std::cout << (*it) << std::endl;
+	it ++;
+	std::cout << (*it) << std::endl;
+	it ++;
+	std::cout << (*it) << std::endl;
+	return (success_msg("test_using_float"));
+}
+
 
 int	err_invalid_test(std::string test_name, int line, const char* file)
 {

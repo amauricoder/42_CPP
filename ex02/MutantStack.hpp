@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   MutantStack.hpp                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: aconceic <aconceic@student.42porto.com>    +#+  +:+       +#+        */
+/*   By: aconceic <aconceic@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/02/03 13:46:54 by aconceic          #+#    #+#             */
-/*   Updated: 2025/02/03 21:46:34 by aconceic         ###   ########.fr       */
+/*   Updated: 2025/02/11 18:21:39 by aconceic         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,8 @@
 
 //stack<T>does not offers iterators, but
 //the underlying container does.
-//c is protected.
+//c is a protected properfy from where whe can find the actual container.
+
 //https://www.cppreference.com/Cpp_STL_ReferenceManual.pdf
 template <typename T>
 class MutantStack : public std::stack<T>
@@ -55,6 +56,9 @@ class MutantStack : public std::stack<T>
 int	test_subject(void);
 int	test_with_list(void);
 int	test_print_using_iterator(void);
+int	test_print_using_iterator2(void);
+int	test_using_float(void);
+int	test_const_iterator(void);
 
 int	err_invalid_test(std::string test_name, int line, const char* file);
 int	success_msg(std::string msg);
